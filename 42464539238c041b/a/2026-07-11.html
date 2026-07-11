@@ -1,0 +1,559 @@
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<title>Daily Report — LatAm Macro</title>
+<style>
+  :root {
+    --bg: #f5f6f8; --panel: #ffffff; --panel-2: #fbfbfc; --ink: #14181f;
+    --ink-soft: #4a5464; --ink-faint: #8a94a6; --line: #e4e7ec; --line-strong: #d3d8e0;
+    --accent: #b7791f; --accent-soft: #f3e6c9; --up: #0f8a54; --up-bg: rgba(15,138,84,0.10);
+    --down: #cf3b53; --down-bg: rgba(207,59,83,0.10); --flat: #8a94a6;
+    --mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0a0d12; --panel: #11161d; --panel-2: #0d1218; --ink: #e8ecf2;
+      --ink-soft: #a3adbd; --ink-faint: #6b7688; --line: #1e2630; --line-strong: #2a3440;
+      --accent: #e0a94a; --accent-soft: #2a2313; --up: #35c88a; --up-bg: rgba(53,200,138,0.12);
+      --down: #f36d84; --down-bg: rgba(243,109,132,0.12); --flat: #6b7688;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #f5f6f8; --panel: #ffffff; --panel-2: #fbfbfc; --ink: #14181f;
+    --ink-soft: #4a5464; --ink-faint: #8a94a6; --line: #e4e7ec; --line-strong: #d3d8e0;
+    --accent: #b7791f; --accent-soft: #f3e6c9; --up: #0f8a54; --up-bg: rgba(15,138,84,0.10);
+    --down: #cf3b53; --down-bg: rgba(207,59,83,0.10); --flat: #8a94a6;
+  }
+  :root[data-theme="dark"] {
+    --bg: #0a0d12; --panel: #11161d; --panel-2: #0d1218; --ink: #e8ecf2;
+    --ink-soft: #a3adbd; --ink-faint: #6b7688; --line: #1e2630; --line-strong: #2a3440;
+    --accent: #e0a94a; --accent-soft: #2a2313; --up: #35c88a; --up-bg: rgba(53,200,138,0.12);
+    --down: #f36d84; --down-bg: rgba(243,109,132,0.12); --flat: #6b7688;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans);
+         line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 28px 20px 64px; }
+  .masthead { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between;
+              gap: 16px; padding-bottom: 18px; border-bottom: 2px solid var(--ink); }
+  .brand .eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: .22em;
+                    text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  .brand h1 { margin: 4px 0 0; font-size: clamp(26px, 4vw, 38px); font-weight: 800;
+              letter-spacing: -0.02em; text-wrap: balance; }
+  .brand .sub { margin-top: 6px; color: var(--ink-soft); font-size: 14px; }
+  .brand .sub b { color: var(--ink); font-weight: 600; }
+  .status { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
+  .pills { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+  .pill { font-family: var(--mono); font-size: 11px; letter-spacing: .04em; padding: 5px 10px;
+          border-radius: 999px; border: 1px solid var(--line-strong); color: var(--ink-soft);
+          display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+  .pill .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--flat); }
+  .pill.open .dot { background: var(--up); box-shadow: 0 0 0 3px var(--up-bg); }
+  .pill.closed .dot { background: var(--ink-faint); }
+  .pill.pre .dot { background: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  section { margin-top: 34px; }
+  .sec-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 14px; }
+  .sec-num { font-family: var(--mono); font-size: 12px; color: var(--accent); font-weight: 700; }
+  .sec-head h2 { margin: 0; font-size: 15px; text-transform: uppercase; letter-spacing: .12em; font-weight: 700; }
+  .sec-head .rule { flex: 1; height: 1px; background: var(--line); }
+  .snap { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; }
+  .snap-top { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  .bias { font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .06em; padding: 6px 12px; border-radius: 8px; text-transform: uppercase; }
+  .bias.on { color: var(--up); background: var(--up-bg); }
+  .bias.off { color: var(--down); background: var(--down-bg); }
+  .bias.neutral { color: var(--ink-soft); background: var(--panel-2); }
+  .demo-tag { font-family: var(--mono); font-size: 10.5px; letter-spacing: .04em; color: var(--ink-faint);
+              border: 1px dashed var(--line-strong); padding: 4px 9px; border-radius: 6px; }
+  .bullets { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+  .bullets li { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: baseline; font-size: 14.5px; color: var(--ink-soft); }
+  .bullets li::before { content: ""; width: 6px; height: 6px; margin-top: 7px; border-radius: 2px; background: var(--accent); }
+  .bullets b { color: var(--ink); font-weight: 650; }
+  .agenda { margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--line); display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 13px; color: var(--ink-soft); }
+  .agenda .lbl { font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-faint); width: 100%; }
+  .agenda .ev { display: inline-flex; gap: 7px; align-items: baseline; }
+  .agenda .ev time { font-family: var(--mono); color: var(--accent); font-size: 12px; }
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-top: 18px; }
+  .kpi { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 13px 14px; }
+  .kpi .k-name { font-size: 11.5px; color: var(--ink-faint); font-family: var(--mono); letter-spacing: .04em; text-transform: uppercase; }
+  .kpi .k-val { font-family: var(--mono); font-size: 21px; font-weight: 600; margin-top: 5px; font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+  .kpi .k-chg { font-family: var(--mono); font-size: 12.5px; margin-top: 3px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 760px) { .grid2 { grid-template-columns: 1fr; } }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .card > h3 { margin: 0; padding: 12px 15px; font-size: 12.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); font-weight: 700; background: var(--panel-2); border-bottom: 1px solid var(--line); }
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  thead th { font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; text-align: right; padding: 8px 15px; border-bottom: 1px solid var(--line); }
+  thead th:first-child { text-align: left; }
+  tbody td { padding: 9px 15px; border-bottom: 1px solid var(--line); text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody td:first-child { text-align: left; font-family: var(--sans); color: var(--ink); font-weight: 550; }
+  tbody tr:hover td { background: var(--panel-2); }
+  .num { color: var(--ink); }
+  .up { color: var(--up); } .down { color: var(--down); } .flat { color: var(--flat); }
+  td.sparkcell { padding-top: 4px; padding-bottom: 4px; width: 86px; }
+  th.sparkhead { width: 86px; }
+  svg.spark { display: block; margin-left: auto; }
+  svg.spark.up { color: var(--up); } svg.spark.down { color: var(--down); } svg.spark.flat { color: var(--flat); }
+  td.z-ext { font-weight: 800; }
+  .fvm-sub { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); margin: 20px 0 10px; }
+  .chart-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
+  .chart-card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px 8px; }
+  .chart-title { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 4px; }
+  .linechart { width: 100%; height: auto; display: block; }
+  .ln-obs { fill: none; stroke: var(--ink); stroke-width: 1.4; }
+  .ln-fair { fill: none; stroke: var(--accent); stroke-width: 1.3; stroke-dasharray: 4 3; }
+  .chart-zlabel { font-family: var(--mono); font-size: 9px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); margin: 7px 0 2px; }
+  .zpanel { width: 100%; height: auto; display: block; }
+  .z-line { fill: none; stroke: var(--accent); stroke-width: 1.1; }
+  .z-fill { fill: var(--accent); opacity: 0.13; }
+  .z-zero { stroke: var(--ink-faint); stroke-width: 0.8; }
+  .z-band { stroke: var(--line-strong); stroke-width: 0.8; stroke-dasharray: 3 3; }
+  .lbl-obs { fill: var(--ink); font-family: var(--mono); font-size: 9px; font-weight: 600; }
+  .lbl-fair { fill: var(--accent); font-family: var(--mono); font-size: 9px; font-weight: 600; }
+  .lbl-z { fill: var(--ink-soft); font-family: var(--mono); font-size: 8.5px; }
+  .lbl-zext { fill: var(--ink); font-family: var(--mono); font-size: 8.5px; font-weight: 700; }
+  .dot-obs { fill: var(--ink); } .dot-fair { fill: var(--accent); } .dot-z { fill: var(--accent); }
+  .dot-zext { fill: var(--down); }
+  .axis-tick { stroke: var(--ink-faint); stroke-width: 0.7; }
+  .axis-lbl { fill: var(--ink-faint); font-family: var(--mono); font-size: 8px; }
+  .fed-chip { font-family: var(--mono); font-size: 11px; padding: 6px 11px; border-radius: 8px;
+              background: var(--accent-soft); color: var(--accent); border: 1px solid var(--line-strong); white-space: nowrap; }
+  .earn-list { display: flex; flex-direction: column; gap: 8px; }
+  .earn-item { display: flex; align-items: baseline; gap: 9px; font-size: 13.5px; color: var(--ink-soft); flex-wrap: wrap; }
+  .earn-item b { color: var(--ink); font-weight: 600; }
+  .earn-when { font-family: var(--mono); font-size: 9.5px; letter-spacing: .04em; text-transform: uppercase;
+               padding: 2px 6px; border-radius: 5px; border: 1px solid var(--line-strong); color: var(--ink-faint); white-space: nowrap; }
+  .earn-when.pre { color: var(--accent); border-color: var(--accent); }
+  .earn-when.post { color: var(--ink-soft); }
+  .earn-note { color: var(--ink-faint); font-size: 12.5px; }
+  .fvm-legend { display: flex; gap: 16px; font-size: 11.5px; color: var(--ink-soft); margin: 4px 0 6px; align-items: center; flex-wrap: wrap; }
+  .fvm-legend .sw { display: inline-block; width: 20px; height: 0; border-top: 2px solid var(--ink); margin-right: 6px; vertical-align: middle; }
+  .fvm-legend .sw.fair { border-top: 2px dashed var(--accent); }
+  .nd { color: var(--ink-faint); font-style: italic; font-family: var(--sans); font-size: 12.5px; }
+  .pending { color: var(--accent); font-family: var(--sans); font-size: 11.5px; }
+  .cal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 760px) { .cal-grid { grid-template-columns: 1fr; } }
+  .cal-card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .cal-card > h3 { margin: 0; padding: 12px 15px; font-size: 12.5px; letter-spacing: .06em; text-transform: uppercase;
+                   color: var(--ink-soft); font-weight: 700; background: var(--panel-2); border-bottom: 1px solid var(--line); }
+  .cal-ev { display: grid; grid-template-columns: auto auto auto 1fr auto; gap: 10px; align-items: center;
+            padding: 9px 15px; border-bottom: 1px solid var(--line); font-size: 13px; }
+  .cal-ev:last-child { border-bottom: none; }
+  .cal-time { font-family: var(--mono); font-size: 12px; color: var(--accent); white-space: nowrap;
+              font-variant-numeric: tabular-nums; }
+  .imp { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+  .imp-high { background: var(--down); } .imp-med { background: var(--accent); } .imp-low { background: var(--ink-faint); }
+  .cal-reg { font-family: var(--mono); font-size: 10px; border: 1px solid var(--line-strong); border-radius: 5px;
+             padding: 1px 5px; color: var(--ink-soft); white-space: nowrap; }
+  .cal-name { color: var(--ink); }
+  .cal-meta { font-family: var(--mono); font-size: 11px; color: var(--ink-faint); white-space: nowrap; text-align: right;
+              font-variant-numeric: tabular-nums; }
+  .cal-empty { padding: 14px 15px; color: var(--ink-faint); font-style: italic; font-size: 13px; }
+  .cal-legend { margin-top: 10px; display: flex; gap: 14px; font-size: 11px; color: var(--ink-faint); font-family: var(--mono); }
+  .cal-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .eod { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+  .eod .c { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 15px; }
+  .eod .c h4 { margin: 0 0 8px; font-size: 14px; display: flex; align-items: center; gap: 8px; }
+  .eod .c h4 .tk { font-family: var(--mono); font-size: 10px; color: var(--ink-faint); border: 1px solid var(--line-strong); border-radius: 5px; padding: 2px 6px; }
+  .eod .row { display: flex; justify-content: space-between; font-size: 13px; padding: 3px 0; color: var(--ink-soft); }
+  .eod .row b { font-family: var(--mono); color: var(--ink); font-variant-numeric: tabular-nums; }
+  .eod .note { margin-top: 6px; font-size: 12px; color: var(--ink-faint); font-style: italic; }
+  footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 12px; color: var(--ink-faint); display: grid; gap: 8px; }
+  footer .cov { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-family: var(--mono); font-size: 10.5px; padding: 3px 8px; border-radius: 6px; border: 1px solid var(--line); }
+  .tag.live::before { content: "● "; color: var(--up); }
+  .tag.wait::before { content: "● "; color: var(--accent); }
+  .disc { line-height: 1.6; }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <div class="brand">
+      <div class="eyebrow">Pre-Market · Kick-Off del Día</div>
+      <h1>Daily Report — LatAm Macro</h1>
+      <div class="sub" id="subhead"></div>
+    </div>
+    <div class="status"><div class="pills" id="pills"></div><div class="pill" id="nextopen" style="border-style:dashed"></div></div>
+  </header>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">01</span><h2>Qué mueve el mercado hoy</h2><span class="rule"></span></div>
+    <div class="snap">
+      <div class="snap-top"><div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><span class="bias" id="bias"></span><span class="fed-chip" id="fedchip" style="display:none"></span></div><span class="demo-tag" id="autotag"></span></div>
+      <ul class="bullets" id="bullets"></ul>
+    </div>
+    <div class="kpis" id="kpis"></div>
+    <div id="fut-wrap"><div class="fvm-sub" style="margin-top:16px">Futuros US · Pre-market</div><div class="kpis" id="futures"></div></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">02</span><h2>Calendario Económico · Hoy y Próximo Hábil</h2><span class="rule"></span></div>
+    <div class="cal-grid" id="calendar"></div>
+    <div class="cal-legend">
+      <span><span class="imp imp-high"></span>Alta</span>
+      <span><span class="imp imp-med"></span>Media</span>
+      <span><span class="imp imp-low"></span>Baja</span>
+      <span>· horas en ET salvo indicación</span>
+    </div>
+    <div id="earnings-wrap"><div class="fvm-sub">Earnings de hoy</div><div class="earn-list" id="earnings"></div></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">03</span><h2>Market Levels</h2><span class="rule"></span></div>
+    <div class="grid2">
+      <div class="card"><h3>Monedas G5 / Majors</h3><div class="table-wrap"><table id="t-g5"></table></div></div>
+      <div class="card"><h3>Índices Accionarios</h3><div class="table-wrap"><table id="t-idx"></table></div></div>
+      <div class="card"><h3>Monedas Asiáticas</h3><div class="table-wrap"><table id="t-asia"></table></div></div>
+      <div class="card"><h3>Monedas LatAm</h3><div class="table-wrap"><table id="t-latam"></table></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">04</span><h2>Commodities</h2><span class="rule"></span></div>
+    <div class="card"><div class="table-wrap"><table id="t-commod"></table></div></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">05</span><h2>Tasas · Soberanas 2Y / 5Y / 10Y</h2><span class="rule"></span></div>
+    <div class="card"><div class="table-wrap"><table id="t-rates"></table></div></div>
+    <div class="card" id="embi-card" style="margin-top:14px"><h3>Riesgo País · EMBI (bp)</h3><div class="table-wrap"><table id="t-embi"></table></div></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">06</span><h2>LatAm · End of Day</h2><span class="rule"></span></div>
+    <div class="eod" id="eod"></div>
+  </section>
+
+  <section id="fv-section">
+    <div class="sec-head"><span class="sec-num">07</span><h2>Fair Value · Desvíos (LatAm)</h2><span class="rule"></span></div>
+    <div class="grid2">
+      <div class="card"><h3>FX · Actual vs Fair Value</h3><div class="table-wrap"><table id="t-fv-fx"></table></div></div>
+      <div class="card"><h3>Tasa 10Y · Actual vs Fair Value</h3><div class="table-wrap"><table id="t-fv-rates"></table></div></div>
+    </div>
+    <div class="cal-legend" id="fv-note"></div>
+  </section>
+
+  <section id="fvm-section">
+    <div class="sec-head"><span class="sec-num">08</span><h2>Fair Value Models · Precio vs Modelo</h2><span class="rule"></span></div>
+    <div class="fvm-legend">
+      <span><span class="sw obs"></span>Observado (real)</span>
+      <span><span class="sw fair"></span>Fair value (modelo)</span>
+      <span id="fvm-range" style="color:var(--ink-faint); font-family:var(--mono); font-size:11px"></span>
+    </div>
+    <div class="fvm-sub">Monedas · FX (moneda / USD)</div>
+    <div class="chart-grid" id="fvm-fx"></div>
+    <div class="fvm-sub">Tasas soberanas · 10 años (%)</div>
+    <div class="chart-grid" id="fvm-rates"></div>
+  </section>
+
+  <footer>
+    <div class="cov" id="coverage"></div>
+    <div class="disc">Fuentes: yfinance, FRED, ECB, MOF Japón, BCCh, BCRP. Δ1D% vs. cierre previo; Δ en bp para tasas; ΔYTD% base 1er dato del año.
+      Uso interno / informativo — no constituye recomendación de inversión.</div>
+  </footer>
+</div>
+
+<script>
+const PAYLOAD = {"meta": {"subhead": "Sábado, <b>11 de julio de 2026</b> · Generado <b>00:59 hrs (Santiago)</b>", "next_open": "Próxima apertura US cash · 09:30 ET"}, "status": [{"label": "Asia · cerrada", "state": "closed"}, {"label": "Europa · abierta", "state": "open"}, {"label": "EE.UU. · pre-market", "state": "pre"}], "snapshot": {"bias": {"text": "Risk-on moderado", "dir": "on"}, "auto_tag": "narrativa generada · 2026-07-10", "bullets": [{"lead": "Fed dividida, tasas altas en foco:", "body": "las minutas de junio (publicadas el 8-jul) mostraron un Comité partido 9-8; el mercado asigna ~70% a una pausa en la reunión del 29-jul. Sesgo higher-for-longer."}, {"lead": "Treasuries ceden:", "body": "el UST 10Y baja a 4.54% (2ª sesión a la baja) ayudado por un petróleo más blando; la curva 2s10s en +36pb, sin señal de recesión."}, {"lead": "Wall Street firme cerca de máximos:", "body": "S&P 500 +0.45% (+10.5% YTD), Nasdaq +0.33% y Dow +0.41%; futuros levemente al alza."}, {"lead": "LatAm FX se aprecia en bloque:", "body": "el peso chileno -1.0% a 925 y el real -1.0%, con el peso colombiano liderando -2.9% (−13.8% YTD). El cobre +1.0% (US$6.28/lb) apuntala al CLP."}, {"lead": "Petróleo y metales preciosos a la baja:", "body": "WTI -0.7% (US$71.6) y oro -0.6% (US$4,107); plata presionada de cara a más señales de la Fed."}, {"lead": "Asia mixta, Europa plana:", "body": "Nikkei +1.4% lidera (+30.7% YTD) frente a un Hang Seng -0.7%; Euro Stoxx 50 -0.2%."}]}, "calendar": {"today_label": "Hoy · Sáb 11 jul", "tomorrow_label": "Próximo hábil · Lun 13 jul", "today": [{"time": "overnight", "reg": "CN", "name": "IPC y PPI (jun)", "imp": "high", "meta": "relevante commodities/CLP"}, {"time": "02:00 ET", "reg": "DE", "name": "IPC final (jun)", "imp": "low", "meta": ""}, {"time": "08:30 ET", "reg": "CA", "name": "Empleo (jun)", "imp": "med", "meta": ""}, {"time": "10:00 ET", "reg": "US", "name": "Conf. U. Michigan prelim (jul)", "imp": "med", "meta": "sentimiento + expect. inflación"}], "tomorrow": [{"time": "14:00 ET", "reg": "US", "name": "Presupuesto federal (jun)", "imp": "low", "meta": ""}, {"time": "heads-up", "reg": "US", "name": "Antesala del IPC (jun), martes 14", "imp": "med", "meta": "catalizador de la semana"}]}, "kpis": [{"name": "S&P 500", "val": "7,575.4", "chg": "+0.42%", "dir": "up"}, {"name": "DXY", "val": "100.97", "chg": "+0.03%", "dir": "up"}, {"name": "USD/CLP", "val": "923.90", "chg": "-1.15%", "dir": "down"}, {"name": "Cobre US$/lb", "val": "6.2335", "chg": "+0.30%", "dir": "up"}, {"name": "Bund 10Y", "val": "3.13%", "chg": "-0.8bp", "dir": "down"}, {"name": "WTI US$/bbl", "val": "71.41", "chg": "-0.93%", "dir": "down"}], "levels": {"g5": [["DXY", 100.97, 0.0297, -0.2174, 2.5909], ["EUR/USD", 1.1419, -0.0228, -0.0228, -2.8172], ["USD/JPY", 161.672, -0.5334, -0.155, 3.1525], ["GBP/USD", 1.3398, 0.0147, 1.0879, -0.56], ["USD/CHF", 0.8078, 0.1562, 0.0248, 1.9911], ["USD/CAD", 1.4153, -0.0664, -0.3941, 3.1861], ["AUD/USD", 0.6955, 0.1536, 1.0559, 4.1443]], "asia": [["USD/CNY", 6.7731, -0.2797, -0.3018, -3.1875], ["USD/KRW", 1498.7, -0.4788, -2.791, 3.814], ["USD/INR", 95.37, -0.513, 0.6114, 6.0115], ["USD/SGD", 1.2914, -0.0464, -0.0542, 0.5215]], "latam": [["USD/CLP", 923.9, -1.1512, 0.2322, 2.6966, [948.94, 967.43, 948.06, 981.43, 974.35, 952.62, 965.77, 967.82, 971.74, 952.34, 955.06, 959.13, 961.47, 950.46, 954.97, 946.94, 942.02, 942.0, 929.38, 930.15, 927.57, 921.38, 909.75, 910.14, 914.25, 893.43, 885.55, 884.61, 859.75, 860.04, 855.16, 865.72, 856.53, 894.38, 896.94, 915.13, 916.69, 912.46, 897.23, 884.95, 889.73, 904.47, 896.12, 886.62, 897.73, 890.97, 895.63, 906.02, 900.18, 919.83, 924.74, 923.9]], ["USD/BRL", 5.1075, -1.0845, -1.4336, -7.4225, [5.5818, 5.5666, 5.5164, 5.5754, 5.4589, 5.3912, 5.4692, 5.413, 5.444, 5.3882, 5.3043, 5.3637, 5.3366, 5.3772, 5.4408, 5.3829, 5.382, 5.3495, 5.2965, 5.3323, 5.3354, 5.4381, 5.4182, 5.5398, 5.5691, 5.372, 5.3713, 5.3743, 5.1836, 5.2375, 5.1962, 5.2205, 5.1242, 5.2301, 5.1514, 5.2621, 5.2368, 5.1545, 5.1002, 4.9924, 4.9849, 5.0175, 4.9323, 5.0249, 5.0117, 5.0517, 5.0607, 5.1138, 5.1815, 5.1941, 5.2222, 5.1075]], ["USD/MXN", 17.462, -0.6034, -0.0572, -2.9061, [18.6238, 18.7188, 18.5367, 18.8429, 18.6015, 18.6193, 18.7687, 18.6502, 18.7258, 18.454, 18.3642, 18.4841, 18.412, 18.3834, 18.4303, 18.3936, 18.5254, 18.5563, 18.315, 18.3659, 18.2845, 18.1716, 18.0032, 18.0156, 17.9722, 17.9834, 17.8236, 17.592, 17.1625, 17.2384, 17.1839, 17.1184, 17.1575, 17.5931, 17.7446, 17.8429, 17.7772, 17.8232, 17.4464, 17.2436, 17.3407, 17.5259, 17.254, 17.1674, 17.3048, 17.3083, 17.2777, 17.2466, 17.3547, 17.5099, 17.4763, 17.462]], ["USD/COP", 3239.6799, -1.6544, -5.9121, -14.026, [4013.95, 4020.4099, 4072.01, 4184.96, 4045.25, 4049.45, 4032.7, 4013.99, 3966.49, 3851.1445, 3898.8999, 3899.3601, 3882.4099, 3872.23, 3854.96, 3838.4612, 3808.6987, 3737.1057, 3701.2603, 3717.5857, 3808.3999, 3840.8601, 3818.0701, 3801.21, 3740.46, 3750.75, 3671.79, 3673.1699, 3668.6101, 3628.22, 3669.53, 3678.28, 3764.29, 3788.48, 3692.5601, 3690.95, 3687.3401, 3660.71, 3653.0901, 3613.03, 3565.6499, 3655.0801, 3737.9299, 3787.98, 3690.8301, 3679.3, 3604.26, 3490.78, 3445.1899, 3437.8999, 3344.9199, 3239.6799]], ["USD/PEN", 3.3903, -0.4609, -0.5777, 2.8024, [3.542, 3.5445, 3.5535, 3.568, 3.554, 3.54, 3.497, 3.4814, 3.4643, 3.483, 3.482, 3.501, 3.475, 3.3942, 3.384, 3.3925, 3.381, 3.3065, 3.368, 3.3103, 3.287, 3.2922, 3.2933, 3.2995, 3.365, 3.362, 3.359, 3.356, 3.345, 3.2971, 3.356, 3.2746, 3.2806, 3.4009, 3.417, 3.426, 3.46, 3.459, 3.3805, 3.439, 3.4385, 3.523, 3.462, 3.427, 3.411, 3.408, 3.3331, 3.3309, 3.382, 3.42, 3.4, 3.3903]], ["USD/ARS", 1487.0, -0.0327, 0.3914, 2.567, [1252.5504, 1261.4951, 1258.4042, 1320.007, 1331.5522, 1313.7227, 1300.5175, 1333.9895, 1362.495, 1432.7512, 1474.0199, 1339.4905, 1424.5133, 1421.5012, 1405.4952, 1482.9888, 1439.4951, 1450.7399, 1407.989, 1424.2357, 1450.2455, 1433.9955, 1440.7455, 1449.2455, 1457.0074, 1467.2262, 1458.4763, 1434.245, 1442.8112, 1445.0072, 1403.9891, 1393.4774, 1397.5128, 1401.5192, 1395.489, 1394.4647, 1376.7261, 1391.7332, 1387.0021, 1358.4962, 1378.4774, 1390.9951, 1387.745, 1392.007, 1397.1635, 1409.4895, 1436.9763, 1432.5074, 1450.8735, 1477.2526, 1488.9904, 1487.0]]], "idx": [["S&P 500", 7575.3901, 0.4209, 1.0138, 10.4531, [6173.0698, 6229.98, 6268.5601, 6305.6001, 6389.77, 6329.9399, 6373.4502, 6411.3701, 6465.9399, 6448.2598, 6532.04, 6600.3501, 6637.9702, 6711.2002, 6753.7202, 6671.0601, 6699.3999, 6890.5898, 6796.29, 6850.9199, 6538.7598, 6849.0898, 6870.3999, 6827.4102, 6834.5, 6905.7402, 6944.8198, 6963.7402, 6875.6201, 6978.0298, 6882.7202, 6941.4702, 6909.5098, 6878.8799, 6740.02, 6632.1899, 6506.48, 6368.8501, 6611.8301, 6886.2402, 7109.1401, 7173.9102, 7200.75, 7412.8398, 7403.0498, 7520.3599, 7553.6802, 7266.9902, 7420.1001, 7357.4902, 7483.2402, 7575.3901]], ["Nasdaq", 26281.6094, 0.2851, 0.259, 13.1091, [20273.4609, 20412.5195, 20640.3301, 20974.1797, 21178.5801, 21053.5801, 21385.4004, 21314.9492, 21544.2695, 21497.7305, 21886.0605, 22261.3301, 22497.8594, 22755.1602, 23043.3809, 22670.0801, 22740.4004, 23958.4707, 23499.8008, 23406.4609, 22078.0508, 23365.6895, 23578.1309, 23195.1699, 23307.6191, 23474.3496, 23547.1699, 23709.8691, 23224.8203, 23857.4492, 22904.5801, 23066.4707, 22886.0703, 22668.2109, 22387.6797, 22105.3594, 21647.6094, 20948.3594, 21996.3398, 23183.7402, 24404.3906, 24887.0996, 25067.8008, 26274.1309, 26090.7305, 26674.7305, 26853.9805, 25169.5, 26021.6602, 25358.5996, 25832.6699, 26281.6094]], ["Dow Jones", 52637.0117, 0.285, 0.6074, 8.7937, [43819.2695, 44406.3594, 44459.6484, 44323.0703, 44837.5586, 44173.6406, 43975.0898, 44922.2695, 45418.0703, 45271.2305, 45490.9219, 46018.3203, 46121.2812, 46441.1016, 46601.7812, 46253.3086, 46590.4102, 47632.0, 47311.0, 48254.8203, 45752.2617, 47716.4219, 47954.9883, 48458.0508, 48134.8906, 48461.9297, 49462.0781, 49191.9883, 49077.2305, 49015.6016, 49501.3008, 50121.3984, 49625.9688, 48977.9219, 47501.5508, 46558.4688, 45577.4688, 45166.6406, 46669.8789, 48218.25, 49442.5586, 49167.7891, 48941.8984, 49704.4688, 49686.1211, 50644.2812, 50687.0703, 49918.7812, 51492.5508, 51920.6211, 52900.0703, 52637.0117]], ["Euro Stoxx 50", 6269.9702, -0.2275, -0.9184, 5.8457, [5244.0298, 5343.1499, 5438.27, 5377.1499, 5355.2002, 5319.9199, 5347.7402, 5434.6401, 5443.96, 5367.0801, 5362.8101, 5440.3999, 5442.0498, 5506.8501, 5628.7202, 5568.1899, 5680.9302, 5711.0601, 5679.25, 5664.46, 5534.71, 5573.9102, 5686.1699, 5718.3198, 5717.8301, 5749.2798, 5923.5698, 6005.0498, 5882.8799, 5933.2002, 5970.4702, 6035.6401, 6059.6201, 6161.5601, 5782.8901, 5748.8901, 5613.8301, 5565.9302, 5692.8599, 5905.02, 5982.6299, 5860.3198, 5869.6299, 5808.4502, 5976.0698, 6050.54, 6062.0698, 6187.6299, 6293.1299, 6221.5498, 6412.6802, 6269.9702]], ["Nikkei 225", 68557.7266, 1.2014, -2.1475, 32.2671, [38885.1484, 38942.0703, 39762.4805, 39821.2812, 39663.3984, 41826.3398, 41069.8203, 41820.4805, 43714.3086, 42807.8203, 42188.7891, 43643.8086, 44902.2695, 45630.3086, 44550.8516, 47734.9883, 48277.7383, 48641.6094, 51325.6094, 50276.3711, 50323.9102, 48659.5195, 49303.4492, 50655.1016, 49383.2891, 50412.8711, 50339.4805, 51939.8906, 53583.5703, 52885.25, 52655.1797, 56363.9414, 57143.8398, 58753.3906, 55278.0586, 54452.9609, 53372.5312, 53373.0703, 53123.4883, 56924.1094, 58475.8984, 59716.1797, 62833.8398, 62654.0508, 61684.1406, 66329.5, 66588.1172, 66020.0391, 71250.0625, 69360.8828, 69744.0703, 68557.7266]], ["Hang Seng", 24175.1191, 0.6032, 5.6558, -8.2137, [23237.7402, 24325.4004, 23916.0605, 24139.5703, 24825.6602, 25388.3496, 24507.8105, 24906.8105, 25176.8496, 25829.9102, 25617.4199, 25633.9102, 26446.5605, 26344.1406, 26622.8809, 26829.4609, 25910.5996, 25781.7695, 26282.6895, 26485.9004, 26572.4609, 25220.0195, 25858.8906, 26085.0801, 25976.7891, 25690.5293, 25854.5996, 26458.9492, 26999.8105, 26585.0605, 27826.9102, 26847.3203, 27032.5391, 26590.3203, 25768.0801, 25959.9004, 25868.5391, 25063.7109, 24788.1406, 25893.5391, 26160.3301, 25978.0703, 26095.8809, 26406.8398, 25675.1797, 25328.2305, 25633.2109, 24407.9609, 24312.1602, 23076.9102, 23350.0293, 24175.1191]], ["Kospi", 7475.9399, 2.5238, -11.8037, 73.4706, [2977.74, 3079.5601, 3116.27, 3183.23, 3192.29, 3190.45, 3245.4399, 3210.01, 3177.28, 3209.8601, 3142.9299, 3219.5901, 3407.3101, 3468.6499, 3431.21, 3584.55, 3814.6899, 4042.8301, 4221.8701, 4073.24, 3953.6201, 3857.78, 3994.9299, 4143.5498, 3999.1299, 4117.3198, 4309.6299, 4586.3198, 4840.7402, 4990.0698, 5224.3599, 5089.1401, 5677.25, 6307.27, 5584.8701, 5487.2402, 5781.2002, 5438.8701, 5377.2998, 5858.8701, 6191.9199, 6475.6299, 6936.9902, 7643.1499, 7271.6602, 8185.29, 8160.5898, 8123.6201, 9052.4199, 8411.21, 8088.3398, 7475.9399]], ["IPSA", 11056.8701, null, 0.0, 0.0, [11056.8701]], ["Bovespa", 177866.0, 2.9663, 3.396, 10.793, [136866.0, 141478.0, 136187.0, 133382.0, 133524.0, 132437.0, 135913.0, 137322.0, 138025.0, 141125.0, 141792.0, 143547.0, 145109.0, 146337.0, 143608.0, 141783.0, 144509.0, 146969.0, 150454.0, 155257.0, 156522.0, 158555.0, 161755.0, 159075.0, 157327.0, 160897.0, 163664.0, 161973.0, 166277.0, 181919.0, 185674.0, 185929.0, 190534.0, 188787.0, 179365.0, 177653.0, 176219.0, 181557.0, 188162.0, 198001.0, 196132.0, 188619.0, 187691.0, 177098.0, 177356.0, 175063.0, 169019.0, 171133.0, 168576.0, 173295.0, 174266.0, 177866.0]], ["IPC (Mexbol)", 66496.1016, 0.5882, -0.7027, 3.6712, [57450.8789, 57423.3984, 56362.6719, 55841.3008, 57083.5586, 56650.2617, 58342.8711, 58462.7891, 58132.3984, 59747.8789, 60679.5312, 61596.2305, 61905.9492, 61929.7188, 60888.5586, 61637.5391, 61308.1992, 63352.8516, 63378.5117, 63190.6602, 61877.2695, 63596.7812, 63378.3008, 64326.1602, 64778.1797, 64366.6992, 64871.6992, 67403.0781, 68036.1328, 69959.7266, 68858.2812, 70888.0391, 71436.5469, 71405.7734, 67313.5, 65648.9062, 64370.9492, 67087.6406, 70221.7578, 69634.7109, 68836.9219, 67097.0625, 70019.4531, 69206.8516, 68384.4062, 68587.7422, 66141.3828, 67954.5469, 67705.3672, 67226.0078, 67060.4922, 66496.1016]], ["Merval", 3280224.0, 2.4273, 3.5226, 4.9238, [2050983.0, 2038948.0, 2078161.0, 2007433.0, 2075286.0, 2197099.0, 2278849.0, 2303302.0, 2092206.0, 2033345.0, 1975730.0, 1728447.0, 1788269.0, 1815382.0, 1773440.0, 1793952.0, 1912739.0, 2018811.0, 2801881.0, 3048197.0, 2883333.0, 2850533.0, 3026470.0, 3046355.0, 3012681.0, 3136090.0, 3051617.0, 3074880.0, 2926727.0, 3066435.0, 3211242.0, 2932838.0, 2816128.0, 2812414.0, 2597025.0, 2700255.0, 2663049.0, 2805317.0, 2999342.0, 2998770.0, 2889185.0, 2840788.0, 2767137.0, 2833120.0, 2816245.0, 3072011.0, 3164196.0, 3153150.0, 3333407.0, 3096068.0, 3157091.0, 3280224.0]]], "commod": [["Cobre (US$/lb)", 6.2335, 0.2977, 0.6621, 10.5231], ["Oro (US$/oz)", 4104.1001, -0.6416, 2.0184, -4.8744], ["Plata (US$/oz)", 59.809, -0.9424, 0.5582, -15.2319], ["Brent (US$/bbl)", 76.01, -0.3801, 4.2375, 25.1193], ["WTI (US$/bbl)", 71.41, -0.9295, 2.7482, 24.5813], ["Gas Natural (US$/MMBtu)", 2.94, -2.3904, -10.229, -18.7396]]}, "futures": [["S&P (ES)", 7620.25, 0.4151, 0.9539, 10.4304], ["Nasdaq (NQ)", 30032.25, 0.3182, -1.6094, 18.3059], ["Dow (YM)", 52906.0, 0.2748, 0.4481, 8.8243], ["Russell (RTY)", 2994.0, -0.4787, -1.6943, 18.6918]], "fed": {"text": "~70% pausa · 29-jul (3.50–3.75%)"}, "earnings": [{"name": "Delta Air Lines (DAL)", "when": "pre", "note": "BPA $1.56, superó; subió guidance"}, {"name": "Barnes & Noble Educ. (BNED)", "when": "pre", "note": "ingresos FY26 +6.5% a/a"}, {"name": "Cohen & Steers (CNS)", "when": "pre", "note": "AUM US$100.1B"}], "rates": [["🇺🇸 US UST", [4.16, -5.0], [4.27, -4.0], [4.54, -2.0], [4.51, 4.41, 4.3, 4.26, 4.34, 4.47, 4.43, 4.37, 4.27, 4.33, 4.26, 4.23, 4.08, 4.04, 4.12, 4.12, 4.13, 3.99, 4.02, 4.11, 4.11, 4.12, 4.01, 4.06, 4.14, 4.12, 4.14, 4.17, 4.18, 4.26, 4.26, 4.21, 4.09, 4.08, 4.05, 4.12, 4.23, 4.39, 4.3, 4.33, 4.29, 4.3, 4.42, 4.36, 4.47, 4.57, 4.45, 4.56, 4.47, 4.5, 4.48, 4.54]], ["🇪🇺 Euro (AAA)", [2.61, -0.5], [2.76, -0.5], [3.13, -0.8], [2.6097, 2.6752, 2.6722, 2.5938, 2.6168, 2.6011, 2.6578, 2.6527, 2.7891, 2.6602, 2.7787, 2.7046, 2.779, 2.8081, 2.8202, 2.7374, 2.744, 2.8373, 2.7678, 2.7418, 2.6652, 2.6978, 2.7362, 2.7505, 2.7865, 2.84, 2.9378, 2.9448, 2.9641, 2.9239, 2.8814, 2.9369, 2.9034, 2.9032, 2.8128, 2.7715, 2.8173, 2.9981, 3.0755, 3.0944, 3.0724, 3.0746, 3.0707, 3.1255, 3.1514, 3.1401, 3.0166, 3.0921, 3.0089, 2.9707, 2.9634, 3.1292]], ["🇯🇵 Japan JGB", [1.38, -2.9], [1.94, 2.1], [2.69, 4.6], [1.477, 1.429, 1.424, 1.459, 1.444, 1.507, 1.528, 1.564, 1.487, 1.53, 1.617, 1.637, 1.643, 1.585, 1.615, 1.669, 1.667, 1.697, 1.676, 1.683, 1.676, 1.7, 1.779, 1.807, 1.939, 1.933, 1.972, 2.042, 2.123, 2.182, 2.28, 2.237, 2.231, 2.218, 2.125, 2.087, 2.205, 2.288, 2.282, 2.366, 2.411, 2.423, 2.392, 2.468, 2.527, 2.783, 2.713, 2.577, 2.669, 2.655, 2.683, 2.69]], ["🇨🇱 Chile BCP", [4.65, 8.0], [5.06, 6.0], [5.46, 4.0], [5.75, 5.76, 5.85, 5.55, 5.68, 5.58, 5.7, 5.8, 5.81, 5.82, 5.73, 5.7, 5.67, 5.6, 5.6, 5.6, 5.59, 5.65, 5.69, 5.66, 5.6, 5.63, 5.58, 5.57, 5.51, 5.55, 5.41, 5.31, 5.33, 5.41, 5.4, 5.33, 5.34, 5.34, 5.3, 5.28, 5.4, 5.54, 5.75, 5.56, 5.46, 5.34, 5.61, 5.56, 5.53, 5.57, 5.57, 5.6, 5.46, 5.5, 5.47, 5.46]], ["🇨🇱 Chile SPC", [4.65, 9.6], [4.94, 9.6], [5.39, 7.6], [5.2031, 5.1726, 5.2639, 5.3603, 5.2538, 5.2538, 5.1777, 5.2639, 5.2842, 5.2995, 5.2081, 5.2284, 5.3096, 5.2842, 5.3096, 5.2437, 5.2639, 5.2893, 5.2995, 5.2386, 5.198, 5.2031, 5.2944, 5.2792, 5.2842, 5.2437, 5.2437, 5.2386, 5.3045, 5.2132, 5.2639, 5.2081, 5.2437, 5.1777, 5.2944, 5.5582, 5.5328, 5.4009, 5.3756, 5.3096, 5.2386, 5.3654, 5.406, 5.3958, 5.5734, 5.3756, 5.3654, 5.3553, 5.2183, 5.2234, 5.2183, 5.3857]]], "eod": [{"flag": "🇨🇱", "country": "Chile", "tk": "USD/CLP", "rows": [["USD/CLP spot", "923.90", ""], ["Δ1D", "-1.15%", "down"], ["TPM", "4.50%", ""]], "note": ""}, {"flag": "🇧🇷", "country": "Brasil", "tk": "USD/BRL", "rows": [["USD/BRL", "5.1075", ""], ["Δ1D", "-1.08%", "down"], ["Bovespa", "+2.97%", "up"]], "note": ""}, {"flag": "🇲🇽", "country": "México", "tk": "USD/MXN", "rows": [["USD/MXN", "17.46", ""], ["Δ1D", "-0.60%", "down"], ["IPC", "+0.59%", "up"]], "note": ""}, {"flag": "🇨🇴", "country": "Colombia", "tk": "USD/COP", "rows": [["USD/COP", "3,239.7", ""], ["Δ1D", "-1.65%", "down"], ["YTD", "-14.03%", "down"]], "note": ""}, {"flag": "🇵🇪", "country": "Perú", "tk": "USD/PEN", "rows": [["Interbancario", "3.4060", ""], ["Spot", "3.3903", ""], ["Δ1D", "-0.46%", "down"]], "note": "Fuente ancla: BCRP."}], "fairvalue": {"asof": "2026-07-10", "fx": [{"ccy": "CLP", "actual": 928.99, "fair": 884.7008, "dev_pct": 5.01, "z": 1.18, "z_series": [0.804, 0.66, 0.965, 0.601, 0.962, 1.431, 1.286, 1.165, 0.889, 0.689, 1.111, 0.894, 0.856, 0.516, 0.284, 0.146, 0.229, -0.426, 0.191, 0.291, 0.207, 0.578, 0.887, 1.306, 1.308, 0.616, 0.834, 0.822, 0.144, -0.142, -0.13, 0.164, 0.129, 0.038, 0.133, 0.104, -0.072, -0.309, -0.346, -0.528, -0.425, -0.546, -0.543, -0.295, -0.098, -0.025, -0.571, 0.234, 0.035, 0.617, 1.077, 1.176]}, {"ccy": "BRL", "actual": 5.1174, "fair": 5.9985, "dev_pct": -14.69, "z": -2.39, "z_series": [0.114, 0.076, -0.455, -0.458, -0.443, -0.485, -0.559, -0.759, -0.964, -1.201, -0.905, -0.74, -0.606, -1.044, -0.853, -0.891, -1.283, -1.497, -1.242, -1.066, -0.769, -0.79, 0.005, -0.069, -0.508, -0.619, -0.846, -0.706, -0.876, -1.243, -1.561, -1.719, -1.92, -1.651, -1.452, -1.833, -2.116, -2.101, -2.39, -2.31, -2.059, -2.294, -2.499, -1.628, -2.048, -2.171, -2.317, -2.143, -1.965, -2.396, -2.077, -2.393]}, {"ccy": "MXN", "actual": 17.5352, "fair": 17.668, "dev_pct": -0.75, "z": -0.15, "z_series": [1.01, 0.91, 0.808, 0.898, 1.001, 1.017, 0.863, 0.833, 0.806, 0.69, 0.741, 0.774, 0.774, 0.502, 0.796, 0.727, 0.316, 0.233, -0.069, -0.245, -0.156, -0.532, -0.521, -0.672, -0.758, -0.847, -1.08, -1.078, -0.794, -1.077, -1.317, -1.327, -1.622, -0.786, -0.675, -0.609, -0.683, -0.7, -1.062, -0.737, -0.334, -0.093, -0.145, 0.164, 0.017, -0.051, -0.183, -0.18, -0.203, -0.313, -0.234, -0.151]}, {"ccy": "PEN", "actual": 3.3972, "fair": 3.6642, "dev_pct": -7.29, "z": -2.25, "z_series": [0.309, 0.042, 0.167, 0.22, 0.112, 0.437, 0.177, -0.143, -0.026, -0.013, 0.065, -0.164, -0.217, -0.748, -0.581, -0.74, -0.941, -1.029, -1.179, -1.095, -0.912, -0.822, -0.866, -0.88, -0.788, -0.975, -0.786, -0.448, -0.789, -1.118, -1.567, -1.594, -2.042, -1.988, -2.333, -2.376, -2.999, -3.492, -3.537, -2.583, -2.255, -2.242, -2.402, -2.498, -2.401, -2.3, -2.623, -2.698, -2.529, -2.272, -2.193, -2.248]}, {"ccy": "COP", "actual": 3288.9, "fair": 4117.8565, "dev_pct": -20.13, "z": -4.4, "z_series": [0.904, 0.919, 0.545, 0.422, 0.074, 0.31, -0.029, -0.292, -0.156, -0.515, -0.161, -0.583, -0.395, -0.72, -0.413, -0.992, -1.459, -1.714, -1.328, -1.032, -0.777, -0.77, -0.829, -1.228, -1.176, -1.314, -1.249, -0.284, -1.066, -0.738, -1.033, -0.835, -0.679, -0.528, -1.349, -1.265, -2.124, -1.723, -1.441, -1.305, -1.447, -0.996, -0.078, -0.063, -1.032, -1.109, -2.027, -2.4, -3.089, -3.663, -3.981, -4.399]}], "rates": [{"ccy": "CLP", "actual": 5.46, "fair": 6.22, "dev_bp": -76.0, "z": -1.2, "z_series": [-0.309, -0.24, -0.149, -0.122, -0.19, -0.023, 0.089, 0.256, 0.096, 0.026, 0.119, 0.018, 0.065, 0.214, -0.108, -0.153, -0.226, -0.566, -0.38, -0.364, -0.575, -0.435, -0.409, -0.369, -0.512, -0.727, -0.811, -0.715, -0.741, -0.67, -0.638, -0.58, -0.712, -0.776, -0.522, -0.448, -0.608, -0.72, -0.894, -0.988, -0.9, -0.72, -1.035, -1.219, -1.217, -1.121, -1.217, -1.167, -1.276, -1.131, -1.292, -1.204]}, {"ccy": "BRL", "actual": 14.45, "fair": 13.47, "dev_bp": 98.0, "z": 0.9, "z_series": [1.113, 1.038, 1.133, 1.254, 1.329, 1.308, 1.532, 1.613, 1.365, 1.382, 1.376, 1.504, 1.509, 1.512, 1.316, 1.215, 1.13, 1.032, 1.035, 0.828, 0.815, 0.966, 1.068, 0.959, 0.83, 0.726, 1.034, 0.653, 0.75, 0.837, 0.965, 0.995, 0.912, 0.968, 0.918, 0.873, 1.088, 0.872, 0.525, 0.454, 0.661, 0.778, 0.645, 0.387, 0.236, 0.497, 1.112, 0.612, 1.08, 1.055, 0.939, 0.897]}, {"ccy": "MXN", "actual": 9.06, "fair": 9.63, "dev_bp": -57.0, "z": -1.41, "z_series": [-0.091, -0.171, -0.548, -0.61, -0.651, -0.839, -0.823, -0.676, -0.714, -1.058, -0.643, -0.647, -0.77, -0.719, -0.57, -0.693, -0.435, -0.479, -0.523, -0.711, -0.288, -0.217, -0.293, -0.247, -0.918, -0.819, -0.292, -0.8, -0.973, -1.105, -0.959, -0.931, -0.888, -0.217, 0.238, -0.341, -0.291, -0.589, -1.1, -1.065, -0.8, -0.411, -0.368, -0.475, -0.885, -0.733, -0.845, -1.225, -1.454, -1.51, -1.543, -1.409]}, {"ccy": "PEN", "actual": 6.1, "fair": 6.44, "dev_bp": -34.0, "z": -0.76, "z_series": [0.212, 0.095, -0.047, -0.076, 0.146, -0.029, -0.082, -0.014, 0.62, 0.58, 0.368, 0.597, 0.862, 0.724, 0.502, 0.156, 0.2, 0.567, -0.351, -0.291, -0.608, -0.759, -1.059, -1.354, -1.35, -1.159, -0.723, -0.708, -1.058, -1.101, -1.163, -1.134, -1.139, 0.655, 0.641, 0.615, 0.903, 0.907, 0.202, 0.399, 0.628, 0.977, 1.041, 0.93, 0.595, 0.67, -0.057, -0.59, -0.546, -0.657, -0.907, -0.756]}, {"ccy": "COP", "actual": 11.81, "fair": 10.58, "dev_bp": 122.0, "z": 1.73, "z_series": [0.295, 0.46, 0.26, 0.827, 0.507, 0.601, 0.84, 1.363, 0.821, 0.903, 0.871, 1.156, 0.887, 1.358, 1.49, 1.432, 2.037, 2.191, 2.445, 2.195, 1.419, 1.871, 1.43, 2.356, 2.008, 1.936, 1.258, 1.835, 1.903, 2.636, 2.752, 3.767, 2.983, 2.377, 2.535, 2.157, 1.375, 1.832, 2.318, 2.841, 3.192, 2.965, 3.354, 3.563, 3.041, 3.006, 1.887, 1.906, 1.865, 1.771, 1.62, 1.732]}], "embi": [{"ccy": "CLP", "bp": 82.0, "chg_bp": 0.0, "series": [105.0, 107.0, 111.0, 102.0, 103.0, 107.0, 106.0, 106.0, 99.0, 94.0, 98.0, 97.0, 102.0, 101.0, 91.0, 95.0, 100.0, 95.0, 102.0, 94.0, 91.0, 90.0, 91.0, 93.0, 92.0, 94.0, 87.0, 90.0, 88.0, 92.0, 92.0, 90.0, 93.0, 96.0, 93.0, 99.0, 106.0, 100.0, 93.0, 87.0, 85.0, 83.0, 83.0, 83.0, 86.0, 86.0, 84.0, 87.0, 85.0, 92.0, 85.0, 82.0]}, {"ccy": "BRL", "bp": 175.0, "chg_bp": 0.0, "series": [197.0, 204.0, 199.0, 187.0, 198.0, 197.0, 197.0, 192.0, 183.0, 178.0, 187.0, 189.0, 196.0, 201.0, 190.0, 189.0, 196.0, 197.0, 202.0, 194.0, 202.0, 198.0, 197.0, 200.0, 198.0, 198.0, 189.0, 188.0, 187.0, 196.0, 196.0, 194.0, 197.0, 201.0, 198.0, 194.0, 202.0, 196.0, 188.0, 185.0, 178.0, 170.0, 168.0, 181.0, 178.0, 175.0, 172.0, 181.0, 178.0, 185.0, 176.0, 175.0]}, {"ccy": "MXN", "bp": 204.0, "chg_bp": 0.0, "series": [272.0, 256.0, 263.0, 244.0, 252.0, 251.0, 237.0, 222.0, 220.0, 214.0, 216.0, 213.0, 224.0, 225.0, 213.0, 218.0, 223.0, 226.0, 235.0, 220.0, 228.0, 221.0, 222.0, 224.0, 222.0, 230.0, 223.0, 218.0, 214.0, 214.0, 217.0, 216.0, 225.0, 228.0, 228.0, 228.0, 243.0, 225.0, 213.0, 206.0, 208.0, 201.0, 195.0, 204.0, 210.0, 205.0, 199.0, 196.0, 199.0, 209.0, 203.0, 204.0]}, {"ccy": "PEN", "bp": 108.0, "chg_bp": 0.0, "series": [138.0, 140.0, 138.0, 128.0, 130.0, 135.0, 133.0, 128.0, 120.0, 117.0, 121.0, 119.0, 126.0, 123.0, 118.0, 125.0, 126.0, 120.0, 130.0, 123.0, 124.0, 124.0, 132.0, 137.0, 136.0, 135.0, 129.0, 126.0, 130.0, 134.0, 137.0, 138.0, 142.0, 143.0, 141.0, 140.0, 145.0, 138.0, 125.0, 127.0, 126.0, 117.0, 117.0, 115.0, 116.0, 113.0, 110.0, 107.0, 110.0, 115.0, 110.0, 108.0]}, {"ccy": "COP", "bp": 190.0, "chg_bp": 0.0, "series": [305.0, 306.0, 310.0, 288.0, 291.0, 280.0, 281.0, 242.0, 254.0, 246.0, 264.0, 255.0, 273.0, 268.0, 251.0, 249.0, 238.0, 241.0, 283.0, 269.0, 287.0, 280.0, 263.0, 277.0, 276.0, 274.0, 259.0, 266.0, 262.0, 256.0, 259.0, 261.0, 293.0, 296.0, 274.0, 268.0, 283.0, 278.0, 250.0, 219.0, 231.0, 234.0, 240.0, 248.0, 241.0, 240.0, 199.0, 189.0, 181.0, 197.0, 191.0, 190.0]}], "range": {"start": "2012", "end": "2026"}, "charts": {"fx": [{"ccy": "CLP", "obs": [472.76, 480.03, 479.42, 478.6, 470.68, 473.6, 473.03, 475.93, 479.04, 496.71, 504.54, 507.05, 506.97, 498.88, 507.64, 529.64, 523.76, 550.53, 555.51, 561.91, 557.63, 550.46, 554.8, 554.05, 576.14, 586.41, 598.64, 576.5, 605.46, 608.15, 625.67, 621.18, 627.0, 615.42, 599.06, 634.13, 647.68, 676.43, 693.78, 685.83, 691.92, 711.2, 704.42, 717.46, 693.78, 677.52, 666.0, 692.52, 685.0, 657.84, 653.06, 669.49, 662.29, 651.18, 675.48, 673.73, 653.84, 643.63, 657.83, 647.47, 666.26, 662.19, 666.59, 649.53, 621.55, 635.79, 636.49, 641.09, 619.03, 608.15, 594.7, 607.23, 594.41, 630.89, 634.57, 652.37, 644.1, 691.05, 659.3, 693.31, 672.36, 693.78, 672.41, 654.52, 666.13, 660.48, 692.62, 694.89, 685.4, 718.55, 717.52, 719.53, 726.34, 828.25, 746.66, 771.94, 804.74, 867.83, 852.52, 823.86, 790.73, 790.82, 784.28, 773.76, 790.81, 771.92, 766.69, 710.26, 724.26, 707.12, 716.46, 700.96, 715.62, 719.17, 744.1, 787.4, 770.33, 805.89, 810.91, 836.73, 858.59, 800.31, 799.99, 798.5, 817.7, 857.98, 863.33, 989.95, 906.03, 866.28, 931.12, 936.35, 905.7, 876.75, 805.45, 797.75, 821.55, 795.23, 794.44, 804.38, 816.78, 863.22, 869.67, 914.3, 910.28, 869.47, 895.77, 908.87, 963.68, 962.06, 974.97, 909.06, 914.86, 918.86, 943.96, 937.86, 908.23, 950.89, 975.41, 989.07, 995.22, 951.78, 917.76, 969.23, 939.43, 936.36, 948.33, 976.42, 969.46, 959.19, 940.57, 929.14, 905.04, 872.22, 866.74, 920.52, 886.32, 891.0, 909.02, 928.99], "fair": [471.65, 481.849, 480.45, 488.388, 466.92, 468.066, 469.249, 474.382, 479.994, 492.645, 506.387, 498.434, 505.721, 517.209, 506.162, 524.937, 532.738, 550.2, 548.073, 558.708, 547.412, 543.535, 549.791, 541.583, 551.952, 557.965, 586.834, 602.278, 604.252, 589.526, 600.641, 608.473, 594.303, 596.365, 576.78, 586.972, 604.699, 611.895, 677.84, 668.114, 664.186, 668.046, 670.383, 695.579, 682.921, 661.438, 651.528, 670.978, 697.297, 667.791, 659.302, 660.517, 683.74, 692.555, 684.562, 702.782, 677.762, 679.249, 674.004, 689.444, 693.542, 655.022, 645.51, 647.232, 628.253, 625.175, 645.624, 645.339, 652.82, 646.526, 666.004, 679.616, 659.205, 668.703, 673.018, 698.158, 698.489, 735.406, 724.926, 739.264, 724.765, 728.33, 712.117, 692.039, 687.579, 679.798, 713.036, 708.278, 708.381, 725.057, 715.205, 723.265, 706.485, 728.95, 726.763, 739.138, 766.148, 802.304, 802.462, 836.833, 837.171, 808.25, 761.511, 773.198, 783.282, 789.508, 760.345, 762.868, 775.944, 762.618, 750.87, 745.192, 718.496, 716.213, 736.789, 743.253, 759.062, 791.29, 794.458, 826.059, 808.037, 818.956, 802.994, 823.935, 815.887, 844.058, 827.388, 840.827, 866.525, 895.41, 902.465, 886.561, 863.674, 832.002, 827.569, 834.384, 854.229, 828.735, 842.05, 832.178, 832.222, 850.594, 855.848, 878.97, 875.68, 872.648, 877.422, 904.681, 910.107, 898.304, 908.521, 879.355, 910.256, 925.05, 978.443, 961.351, 934.427, 971.243, 974.244, 990.692, 1005.573, 992.104, 960.638, 964.847, 950.496, 934.115, 920.84, 938.055, 919.012, 921.036, 937.637, 921.099, 863.749, 850.113, 870.241, 920.867, 887.2, 913.46, 900.222, 884.701], "z": [0.056, -0.091, -0.052, -0.488, 0.193, 0.283, 0.193, 0.078, -0.048, 0.198, -0.088, 0.412, 0.059, -0.869, 0.07, 0.214, -0.41, 0.014, 0.324, 0.137, 0.445, 0.304, 0.218, 0.548, 1.032, 1.197, 0.479, -1.054, 0.048, 0.749, 0.983, 0.497, 1.289, 0.757, 0.912, 1.86, 1.653, 2.414, 0.559, 0.63, 0.985, 1.507, 1.192, 0.745, 0.379, 0.578, 0.529, 0.76, -0.429, -0.362, -0.229, 0.325, -0.768, -1.483, -0.322, -1.017, -0.865, -1.297, -0.585, -1.513, -0.967, 0.262, 0.773, 0.085, -0.259, 0.405, -0.343, -0.159, -1.28, -1.474, -2.727, -2.712, -2.491, -1.402, -1.417, -1.634, -1.952, -1.498, -2.285, -1.545, -1.807, -1.17, -1.382, -1.342, -0.763, -0.694, -0.7, -0.46, -0.794, -0.217, 0.077, -0.125, 0.667, 3.074, 0.65, 1.045, 1.183, 1.89, 1.457, -0.377, -1.374, -0.525, 0.709, 0.017, 0.23, -0.543, 0.2, -1.721, -1.66, -1.819, -1.13, -1.474, -0.097, 0.099, 0.237, 1.389, 0.354, 0.44, 0.493, 0.309, 1.461, -0.555, -0.091, -0.755, 0.053, 0.394, 1.023, 3.931, 1.073, -0.797, 0.752, 1.315, 1.144, 1.261, -0.653, -1.081, -0.939, -0.994, -1.402, -0.818, -0.451, 0.354, 0.385, 0.948, 0.933, -0.088, 0.498, 0.111, 1.377, 1.651, 1.699, 0.8, 0.121, -0.162, -0.864, -0.596, -0.685, -0.51, 0.028, -0.04, -0.249, -0.999, -1.1, 0.109, -0.282, 0.057, 0.708, 0.965, 1.286, 0.977, 0.075, 0.209, 1.124, 0.618, -0.097, -0.009, -0.024, -0.6, 0.234, 1.176]}, {"ccy": "BRL", "obs": [2.019, 2.029, 2.093, 2.042, 2.031, 1.972, 2.002, 2.018, 2.028, 2.141, 2.266, 2.272, 2.298, 2.203, 2.185, 2.334, 2.35, 2.405, 2.354, 2.32, 2.254, 2.212, 2.229, 2.222, 2.284, 2.243, 2.48, 2.399, 2.576, 2.676, 2.587, 2.867, 3.154, 3.035, 3.011, 3.1, 3.151, 3.454, 3.841, 3.917, 3.854, 3.908, 3.865, 4.088, 3.948, 3.603, 3.58, 3.5, 3.472, 3.305, 3.148, 3.214, 3.248, 3.196, 3.393, 3.275, 3.169, 3.095, 3.085, 3.098, 3.094, 3.31, 3.251, 3.127, 3.125, 3.144, 3.265, 3.208, 3.32, 3.235, 3.256, 3.279, 3.385, 3.685, 3.728, 3.871, 3.763, 4.123, 3.897, 3.727, 3.842, 3.929, 3.776, 3.713, 3.786, 3.933, 3.986, 3.855, 3.755, 3.979, 4.097, 4.083, 4.0, 4.245, 4.058, 4.171, 4.389, 5.136, 5.252, 5.827, 5.064, 5.321, 5.417, 5.307, 5.666, 5.744, 5.347, 5.215, 5.468, 5.397, 5.522, 5.541, 5.257, 5.074, 5.181, 5.225, 5.162, 5.436, 5.64, 5.614, 5.641, 5.519, 5.088, 4.964, 4.659, 5.045, 5.103, 5.365, 5.109, 5.154, 5.196, 5.329, 5.292, 5.287, 5.148, 5.162, 5.241, 4.984, 4.933, 4.86, 4.865, 4.897, 4.968, 5.13, 5.047, 4.865, 4.823, 4.973, 4.929, 5.014, 5.226, 5.139, 5.373, 5.411, 5.624, 5.634, 5.444, 5.753, 5.889, 6.19, 5.929, 5.709, 5.659, 5.862, 5.624, 5.54, 5.486, 5.463, 5.457, 5.332, 5.344, 5.348, 5.52, 5.293, 5.225, 5.242, 4.994, 4.985, 5.117, 5.117], "fair": [1.837, 1.985, 1.996, 2.023, 1.919, 1.965, 2.028, 2.155, 2.143, 2.182, 2.17, 2.136, 2.177, 2.234, 2.221, 2.265, 2.23, 2.374, 2.322, 2.378, 2.313, 2.292, 2.359, 2.315, 2.439, 2.474, 2.597, 2.658, 2.716, 2.793, 3.052, 2.995, 3.03, 3.002, 2.863, 2.982, 3.11, 3.356, 3.329, 3.427, 3.352, 3.507, 3.389, 3.714, 3.728, 3.426, 3.487, 3.576, 3.727, 3.523, 3.535, 3.564, 3.561, 3.61, 3.19, 3.273, 3.265, 3.208, 3.257, 3.381, 3.406, 3.368, 3.308, 3.284, 3.351, 3.31, 3.328, 3.329, 3.385, 3.397, 3.596, 3.755, 3.697, 3.684, 3.66, 3.584, 3.538, 3.732, 3.523, 3.644, 3.75, 4.051, 4.004, 3.933, 3.927, 3.94, 4.005, 4.126, 4.119, 4.224, 4.184, 4.313, 4.148, 4.248, 4.179, 4.398, 4.541, 5.828, 5.65, 5.4, 5.256, 5.139, 5.036, 5.251, 5.406, 5.511, 5.19, 5.148, 5.123, 4.99, 4.849, 4.796, 4.696, 4.802, 4.922, 5.002, 5.099, 5.22, 5.092, 5.542, 5.362, 5.446, 5.396, 5.174, 5.071, 4.87, 4.847, 5.456, 5.397, 5.247, 5.177, 4.764, 4.835, 4.919, 4.943, 4.906, 5.168, 4.943, 5.041, 4.745, 4.646, 4.691, 4.646, 4.771, 4.776, 4.916, 4.999, 5.04, 5.037, 4.888, 4.897, 4.755, 4.963, 4.941, 5.587, 5.712, 5.548, 5.576, 5.496, 5.46, 5.447, 5.438, 5.545, 5.626, 5.514, 5.451, 5.454, 5.631, 5.664, 5.709, 5.732, 5.797, 5.59, 5.588, 5.747, 5.943, 5.779, 5.687, 5.899, 5.999], "z": [1.424, 0.336, 0.72, 0.15, 0.856, 0.055, -0.19, -0.988, -0.827, -0.284, 0.656, 0.931, 0.812, -0.211, -0.248, 0.45, 0.792, 0.195, 0.211, -0.371, -0.393, -0.533, -0.853, -0.621, -0.992, -1.476, -0.694, -1.545, -0.798, -0.643, -2.492, -0.659, 0.601, 0.17, 0.762, 0.585, 0.198, 0.436, 2.16, 2.017, 2.108, 1.634, 1.98, 1.444, 0.868, 0.76, 0.4, -0.326, -1.067, -0.957, -1.743, -1.555, -1.384, -1.835, 0.933, 0.013, -0.45, -0.541, -0.814, -1.319, -1.447, -0.261, -0.261, -0.739, -1.051, -0.775, -0.288, -0.559, -0.289, -0.733, -1.495, -2.041, -1.326, 0.004, 0.281, 1.165, 0.929, 1.503, 1.519, 0.34, 0.367, -0.461, -0.885, -0.864, -0.55, -0.026, -0.071, -1.024, -1.391, -0.9, -0.316, -0.825, -0.546, -0.007, -0.443, -0.798, -0.511, -1.905, -1.099, 1.148, -0.562, 0.525, 1.1, 0.162, 0.711, 0.625, 0.451, 0.196, 0.984, 1.184, 1.96, 2.178, 1.7, 0.833, 0.772, 0.66, 0.188, 0.612, 1.542, 0.195, 0.766, 0.202, -0.885, -0.626, -1.277, 0.534, 0.777, -0.252, -0.823, -0.268, 0.059, 1.692, 1.362, 1.09, 0.614, 0.769, 0.213, 0.125, -0.326, 0.36, 0.694, 0.649, 1.011, 1.096, 0.832, -0.153, -0.538, -0.202, -0.323, 0.384, 0.981, 1.171, 1.2, 1.368, 0.102, -0.207, -0.284, 0.472, 1.043, 1.894, 1.279, 0.733, 0.309, 0.619, 0.299, 0.248, 0.088, -0.455, -0.559, -1.029, -1.055, -1.214, -0.188, -0.815, -1.432, -1.892, -2.199, -1.986, -2.143, -2.393]}, {"ccy": "MXN", "obs": [12.756, 13.059, 12.955, 13.013, 12.645, 12.771, 12.414, 12.303, 12.276, 12.736, 12.833, 12.591, 13.194, 13.066, 12.844, 13.112, 13.079, 13.455, 13.272, 13.216, 13.061, 12.904, 13.001, 12.985, 13.236, 13.057, 13.487, 13.43, 13.938, 14.689, 14.57, 15.08, 14.956, 15.39, 15.117, 15.424, 15.727, 16.122, 16.987, 16.75, 16.465, 16.603, 17.277, 18.549, 18.021, 17.385, 17.453, 18.167, 18.82, 18.459, 18.448, 18.299, 19.328, 18.959, 20.612, 20.74, 21.404, 20.429, 19.09, 18.518, 18.62, 18.055, 17.92, 17.862, 17.931, 18.207, 19.243, 18.567, 19.815, 18.796, 18.667, 18.572, 18.032, 19.591, 20.799, 19.039, 18.439, 19.382, 18.89, 20.088, 20.35, 19.898, 19.055, 19.187, 18.933, 18.829, 19.045, 19.19, 19.169, 19.664, 19.689, 19.677, 19.131, 19.599, 18.953, 18.809, 18.814, 24.222, 24.219, 23.986, 22.384, 22.476, 22.391, 21.528, 21.632, 21.26, 20.09, 19.854, 19.986, 20.469, 20.561, 19.827, 19.775, 19.957, 19.866, 20.053, 19.895, 20.551, 20.6, 21.663, 20.685, 20.669, 20.29, 20.344, 19.901, 20.035, 20.439, 20.729, 20.274, 20.001, 19.997, 19.826, 19.263, 19.455, 18.832, 18.421, 18.647, 18.056, 17.455, 17.211, 17.063, 17.09, 17.363, 17.91, 18.068, 17.137, 16.967, 17.367, 17.05, 16.841, 16.945, 16.688, 18.728, 17.835, 19.286, 19.909, 19.411, 20.046, 20.585, 20.147, 20.512, 20.443, 20.054, 19.978, 19.369, 18.904, 18.62, 18.607, 18.715, 18.363, 18.418, 18.343, 17.925, 17.49, 17.266, 17.79, 17.262, 17.22, 17.306, 17.535], "fair": [11.957, 12.538, 13.072, 12.786, 12.698, 12.733, 12.924, 13.278, 13.117, 12.678, 12.69, 12.421, 12.455, 12.415, 12.836, 13.076, 13.06, 13.701, 13.503, 13.372, 13.085, 12.916, 12.851, 12.805, 13.159, 13.418, 13.96, 14.467, 15.052, 15.656, 16.672, 16.622, 16.816, 16.352, 15.408, 15.24, 15.828, 16.919, 16.656, 17.432, 17.298, 18.005, 17.875, 19.529, 19.632, 18.382, 18.022, 18.132, 18.073, 18.013, 18.051, 17.971, 18.156, 18.202, 18.178, 18.601, 18.744, 18.519, 18.406, 18.605, 18.171, 18.096, 17.756, 17.642, 17.658, 17.603, 18.006, 18.024, 18.492, 17.353, 17.408, 17.547, 17.519, 17.764, 18.014, 17.677, 17.804, 18.227, 17.752, 18.198, 19.093, 20.139, 20.04, 19.807, 19.46, 19.359, 19.23, 19.376, 19.208, 19.748, 19.939, 20.201, 19.761, 20.4, 19.924, 20.348, 20.612, 23.991, 23.323, 22.904, 21.984, 21.459, 21.703, 21.299, 21.574, 21.772, 21.095, 20.736, 20.379, 20.207, 20.394, 19.884, 19.254, 19.417, 19.589, 19.76, 19.619, 19.992, 19.947, 20.725, 20.628, 20.395, 20.127, 19.753, 19.496, 19.049, 18.673, 20.009, 20.034, 19.952, 20.227, 19.568, 19.74, 20.169, 19.8, 19.366, 19.912, 19.278, 18.966, 17.93, 17.434, 17.584, 17.822, 17.853, 18.183, 18.575, 18.973, 19.008, 18.614, 18.244, 18.1, 17.865, 18.545, 18.365, 19.292, 19.577, 18.95, 19.076, 19.607, 19.381, 19.224, 18.938, 19.23, 18.409, 18.265, 17.782, 17.67, 17.878, 17.932, 17.76, 17.963, 18.461, 18.527, 18.492, 18.314, 18.464, 17.934, 17.383, 17.462, 17.668], "z": [1.305, 0.823, -0.179, 0.356, -0.083, 0.062, -0.809, -1.537, -1.335, 0.093, 0.228, 0.276, 1.164, 1.031, 0.015, 0.057, 0.03, -0.363, -0.346, -0.236, -0.035, -0.017, 0.234, 0.283, 0.12, -0.548, -0.695, -1.497, -1.548, -1.284, -2.716, -1.962, -2.361, -1.22, -0.383, 0.243, -0.127, -0.972, 0.398, -0.803, -0.993, -1.633, -0.684, -1.038, -1.725, -1.122, -0.646, 0.041, 0.819, 0.495, 0.441, 0.366, 1.262, 0.823, 2.535, 2.197, 2.678, 1.981, 0.737, -0.093, 0.494, -0.045, 0.187, 0.252, 0.311, 0.681, 1.341, 0.599, 1.395, 1.612, 1.409, 1.146, 0.583, 1.975, 2.9, 1.498, 0.708, 1.24, 1.255, 1.994, 1.287, -0.242, -1.014, -0.64, -0.551, -0.558, -0.194, -0.193, -0.04, -0.085, -0.253, -0.528, -0.651, -0.806, -1.006, -1.584, -1.839, 0.195, 0.761, 0.932, 0.365, 0.935, 0.631, 0.218, 0.056, -0.478, -0.983, -0.875, -0.391, 0.261, 0.166, -0.056, 0.54, 0.554, 0.284, 0.298, 0.284, 0.558, 0.652, 0.894, 0.057, 0.27, 0.164, 0.596, 0.416, 1.019, 1.823, 0.715, 0.242, 0.051, -0.23, 0.266, -0.492, -0.726, -1.009, -1.008, -1.323, -1.319, -1.673, -0.823, -0.432, -0.572, -0.525, 0.066, -0.126, -1.623, -2.252, -1.819, -1.768, -1.612, -1.328, -1.373, 0.199, -0.589, -0.005, 0.341, 0.486, 1.002, 0.983, 0.784, 1.309, 1.544, 0.848, 1.652, 1.184, 1.235, 1.058, 0.808, 0.863, 0.675, 0.506, -0.128, -0.665, -1.123, -1.187, -0.749, -0.768, -0.188, -0.18, -0.151]}, {"ccy": "PEN", "obs": [2.593, 2.594, 2.579, 2.547, 2.554, 2.588, 2.592, 2.591, 2.636, 2.728, 2.77, 2.795, 2.808, 2.777, 2.754, 2.801, 2.787, 2.822, 2.806, 2.81, 2.771, 2.789, 2.791, 2.786, 2.793, 2.85, 2.905, 2.917, 2.918, 2.974, 3.022, 3.081, 3.076, 3.125, 3.151, 3.158, 3.177, 3.202, 3.227, 3.217, 3.287, 3.376, 3.4, 3.457, 3.519, 3.393, 3.271, 3.329, 3.323, 3.28, 3.307, 3.366, 3.399, 3.37, 3.416, 3.375, 3.279, 3.238, 3.249, 3.241, 3.249, 3.276, 3.255, 3.241, 3.234, 3.263, 3.248, 3.232, 3.238, 3.217, 3.249, 3.257, 3.216, 3.262, 3.272, 3.279, 3.268, 3.314, 3.314, 3.36, 3.373, 3.368, 3.338, 3.317, 3.29, 3.296, 3.316, 3.33, 3.283, 3.387, 3.363, 3.368, 3.338, 3.386, 3.32, 3.32, 3.39, 3.554, 3.413, 3.436, 3.465, 3.502, 3.551, 3.526, 3.627, 3.614, 3.603, 3.611, 3.635, 3.654, 3.724, 3.672, 3.712, 3.891, 3.961, 4.109, 4.103, 4.13, 3.99, 4.056, 3.976, 3.843, 3.743, 3.793, 3.736, 3.77, 3.737, 3.957, 3.92, 3.881, 3.952, 3.977, 3.843, 3.818, 3.888, 3.83, 3.769, 3.775, 3.691, 3.652, 3.623, 3.702, 3.705, 3.813, 3.84, 3.726, 3.686, 3.761, 3.789, 3.694, 3.745, 3.717, 3.773, 3.781, 3.736, 3.795, 3.71, 3.77, 3.753, 3.73, 3.718, 3.686, 3.619, 3.728, 3.675, 3.625, 3.549, 3.553, 3.532, 3.471, 3.391, 3.363, 3.362, 3.354, 3.363, 3.45, 3.436, 3.42, 3.388, 3.397], "fair": [2.477, 2.542, 2.591, 2.59, 2.565, 2.544, 2.586, 2.657, 2.688, 2.693, 2.741, 2.738, 2.75, 2.747, 2.758, 2.767, 2.776, 2.854, 2.844, 2.829, 2.815, 2.811, 2.83, 2.815, 2.875, 2.884, 2.949, 2.991, 2.982, 2.943, 3.015, 3.031, 3.054, 3.085, 3.014, 3.046, 3.113, 3.181, 3.169, 3.277, 3.25, 3.261, 3.208, 3.313, 3.364, 3.345, 3.319, 3.387, 3.396, 3.306, 3.297, 3.318, 3.372, 3.33, 3.279, 3.354, 3.342, 3.294, 3.3, 3.35, 3.302, 3.264, 3.227, 3.276, 3.327, 3.271, 3.294, 3.284, 3.353, 3.31, 3.348, 3.397, 3.422, 3.431, 3.418, 3.338, 3.307, 3.374, 3.319, 3.304, 3.317, 3.39, 3.448, 3.46, 3.461, 3.481, 3.441, 3.41, 3.455, 3.408, 3.408, 3.427, 3.392, 3.466, 3.45, 3.466, 3.452, 3.523, 3.505, 3.658, 3.62, 3.565, 3.531, 3.522, 3.587, 3.589, 3.654, 3.634, 3.646, 3.63, 3.616, 3.578, 3.525, 3.583, 3.622, 3.665, 3.717, 3.822, 3.822, 3.828, 3.888, 3.905, 3.875, 3.899, 3.865, 3.747, 3.735, 3.864, 3.869, 3.816, 3.792, 3.66, 3.679, 3.789, 3.811, 3.71, 3.823, 3.806, 3.768, 3.591, 3.564, 3.616, 3.621, 3.611, 3.599, 3.647, 3.699, 3.687, 3.655, 3.654, 3.637, 3.583, 3.643, 3.63, 3.788, 3.814, 3.737, 3.671, 3.692, 3.661, 3.661, 3.608, 3.652, 3.602, 3.581, 3.546, 3.527, 3.533, 3.511, 3.463, 3.489, 3.496, 3.458, 3.44, 3.543, 3.786, 3.724, 3.737, 3.71, 3.664], "z": [1.359, 0.606, -0.143, -0.491, -0.131, 0.505, 0.077, -0.75, -0.584, 0.389, 0.316, 0.617, 0.622, 0.326, -0.05, 0.366, 0.109, -0.331, -0.403, -0.195, -0.47, -0.237, -0.416, -0.302, -0.856, -0.348, -0.444, -0.742, -0.646, 0.31, 0.07, 0.484, 0.217, 0.386, 1.326, 1.07, 0.612, 0.199, 0.543, -0.548, 0.345, 1.031, 1.73, 1.262, 1.339, 0.421, -0.427, -0.51, -0.649, -0.234, 0.092, 0.428, 0.235, 0.353, 1.215, 0.194, -0.567, -0.507, -0.463, -0.975, -0.477, 0.113, 0.258, -0.326, -0.838, -0.074, -0.409, -0.469, -1.041, -0.849, -0.89, -1.245, -1.839, -1.496, -1.304, -0.526, -0.353, -0.529, -0.05, 0.499, 0.495, -0.19, -0.961, -1.26, -1.505, -1.62, -1.096, -0.707, -1.522, -0.182, -0.39, -0.511, -0.474, -0.69, -1.144, -1.274, -0.536, 0.261, -0.791, -1.859, -1.304, -0.529, 0.175, 0.036, 0.323, 0.204, -0.417, -0.189, -0.087, 0.198, 0.873, 0.771, 1.538, 2.447, 2.658, 3.402, 2.934, 2.306, 1.283, 1.716, 0.66, -0.477, -1.035, -0.824, -1.014, 0.18, 0.014, 0.705, 0.39, 0.496, 1.229, 2.469, 1.301, 0.229, 0.591, 0.948, -0.42, -0.236, -0.61, 0.503, 0.486, 0.695, 0.682, 1.617, 1.933, 0.637, -0.101, 0.588, 1.066, 0.323, 0.871, 1.09, 1.044, 1.216, -0.409, -0.146, -0.213, 0.788, 0.487, 0.559, 0.456, 0.634, -0.266, 1.026, 0.768, 0.651, 0.185, 0.167, 0.177, 0.069, -0.847, -1.156, -0.841, -0.746, -1.552, -2.762, -2.387, -2.637, -2.698, -2.248]}, {"ccy": "COP", "obs": [1794.4, 1830.8, 1814.91, 1772.68, 1779.05, 1798.2, 1819.32, 1840.77, 1839.4, 1891.3, 1904.69, 1872.0, 1949.7, 1885.5, 1882.65, 1932.5, 1928.9, 1995.3, 2044.55, 1990.33, 1928.88, 1924.09, 1880.85, 1856.7, 1888.85, 1933.76, 2024.84, 2048.6, 2215.64, 2368.75, 2389.23, 2496.11, 2560.0, 2484.24, 2427.0, 2536.0, 2685.4, 2904.0, 3162.5, 2965.0, 2894.99, 3143.83, 3170.94, 3390.32, 3310.1, 3072.0, 2969.35, 3027.1, 2996.72, 2935.16, 2984.0, 2869.56, 2969.25, 2984.48, 3160.5, 2996.5, 2924.47, 2898.31, 2911.42, 2852.05, 2879.23, 2931.53, 3072.04, 2995.57, 2930.84, 2952.05, 3019.52, 2994.94, 2965.63, 2854.08, 2880.75, 2850.09, 2708.05, 2858.92, 2857.66, 2894.13, 2909.93, 3099.57, 3012.54, 3204.85, 3273.89, 3281.38, 3147.98, 3108.25, 3087.04, 3155.79, 3284.0, 3266.82, 3204.65, 3444.68, 3379.01, 3454.48, 3376.6, 3515.8, 3284.01, 3360.89, 3402.49, 4103.0, 3976.07, 3912.61, 3776.69, 3609.39, 3749.66, 3713.0, 3871.46, 3864.31, 3603.51, 3499.0, 3533.0, 3564.72, 3559.0, 3610.0, 3683.86, 3651.65, 3822.0, 3995.0, 3784.6, 3789.0, 3766.51, 4021.55, 3990.0, 3973.73, 3937.87, 3747.89, 3729.48, 4050.11, 3961.44, 4538.33, 4306.0, 4456.04, 4501.23, 4836.26, 4808.63, 4769.37, 4524.44, 4967.5, 4799.38, 4484.72, 4512.59, 4168.66, 4179.44, 4070.95, 4081.561, 4213.083, 4058.049, 3953.403, 3862.54, 3954.785, 3915.007, 3873.311, 3898.5, 3821.44, 4023.1, 3967.5, 4135.48, 4170.83, 4184.782, 4386.02, 4389.408, 4368.83, 4261.4, 4098.653, 4153.9, 4301.88, 4178.65, 4179.5, 4006.31, 4045.3, 4005.05, 3884.872, 3872.478, 3736.748, 3708.995, 3602.968, 3693.235, 3680.392, 3606.03, 3780.2, 3492.01, 3288.9], "fair": [1686.147, 1768.27, 1762.652, 1762.133, 1766.796, 1829.363, 1846.019, 1874.155, 1881.33, 1832.53, 1883.937, 1848.804, 1875.738, 1826.49, 1862.758, 1895.191, 1858.878, 1948.781, 1900.96, 1925.79, 1924.863, 1923.195, 1924.738, 1915.923, 1995.036, 2037.781, 2163.784, 2226.449, 2301.777, 2435.125, 2540.935, 2562.889, 2666.619, 2691.576, 2609.347, 2670.571, 2754.333, 2945.901, 2881.84, 2886.46, 2844.127, 2938.536, 2952.258, 3166.782, 3088.753, 2836.792, 2756.549, 2862.395, 2880.44, 2889.406, 2859.582, 2851.908, 2966.071, 3044.884, 3232.344, 3263.654, 3158.558, 3064.586, 2992.235, 2986.712, 2923.094, 2900.932, 2878.287, 2841.457, 2813.327, 2906.946, 2994.276, 2911.087, 2943.531, 2697.305, 2731.953, 2744.409, 2754.366, 2969.962, 3063.932, 2977.859, 3013.218, 3077.742, 3075.864, 3194.686, 3282.782, 3354.093, 3262.064, 3282.027, 3277.604, 3342.199, 3382.913, 3419.455, 3364.119, 3473.03, 3540.393, 3606.136, 3498.833, 3575.443, 3415.095, 3470.49, 3528.63, 4509.999, 4169.025, 4035.378, 3819.79, 3836.055, 3729.901, 3621.107, 3688.866, 3764.931, 3562.082, 3426.178, 3385.395, 3373.314, 3510.88, 3444.859, 3409.391, 3475.242, 3589.973, 3672.685, 3609.459, 3759.428, 3776.646, 3952.401, 3920.662, 3948.087, 3898.812, 3910.375, 3994.789, 4198.16, 4476.366, 4745.417, 4481.93, 4652.338, 4732.853, 4754.62, 4501.02, 4431.721, 4196.324, 4188.216, 4191.479, 4047.058, 4022.415, 3841.044, 3732.413, 3849.952, 3976.371, 4091.26, 4147.377, 3875.45, 3770.256, 3844.212, 3840.161, 3824.851, 3967.432, 3868.537, 4018.956, 3879.926, 4062.515, 4069.794, 4064.855, 4201.708, 4350.139, 4352.06, 4343.842, 4281.817, 4387.128, 4193.549, 4100.52, 3896.27, 3881.708, 3933.879, 4010.712, 3967.769, 4036.21, 4069.609, 3961.814, 3864.906, 3849.595, 3983.439, 3834.036, 3820.082, 3947.548, 4117.856], "z": [1.216, 0.679, 0.571, 0.116, 0.134, -0.337, -0.286, -0.353, -0.442, 0.617, 0.213, 0.243, 0.756, 0.621, 0.207, 0.38, 0.722, 0.461, 1.424, 0.644, 0.04, 0.008, -0.452, -0.615, -1.071, -1.026, -1.299, -1.63, -0.747, -0.542, -1.205, -0.518, -0.799, -1.569, -1.418, -1.013, -0.497, -0.281, 1.817, 0.524, 0.346, 1.32, 1.397, 1.333, 1.353, 1.557, 1.454, 1.094, 0.773, 0.306, 0.832, 0.12, 0.02, -0.393, -0.441, -1.672, -1.507, -1.092, -0.537, -0.904, -0.297, 0.204, 1.274, 1.032, 0.8, 0.3, 0.163, 0.555, 0.145, 1.104, 1.037, 0.738, -0.333, -0.746, -1.365, -0.559, -0.683, 0.137, -0.408, 0.061, -0.054, -0.43, -0.697, -1.065, -1.173, -1.124, -0.582, -0.894, -0.951, -0.161, -0.914, -0.842, -0.697, -0.33, -0.767, -0.629, -0.713, -1.851, -0.928, -0.605, -0.223, -1.193, 0.102, 0.489, 0.944, 0.509, 0.225, 0.41, 0.834, 1.079, 0.265, 0.915, 1.514, 0.968, 1.224, 1.645, 0.926, 0.152, -0.054, 0.338, 0.342, 0.126, 0.194, -0.831, -1.345, -0.703, -2.392, -0.874, -0.784, -0.844, -0.983, 0.332, 1.292, 1.436, 1.472, 3.338, 2.649, 2.008, 2.249, 1.6, 2.212, 1.091, 0.51, 0.573, -0.427, 0.389, 0.472, 0.554, 0.377, 0.245, -0.344, -0.241, 0.019, 0.436, 0.347, 0.479, 0.568, 0.839, 0.175, 0.074, -0.376, -0.856, -1.07, 0.498, 0.368, 1.372, 0.617, 0.545, -0.029, -0.414, -0.811, -1.67, -1.291, -1.374, -0.812, -1.549, -1.2, -0.206, -2.4, -4.399]}], "rates": [{"ccy": "CLP", "obs": [5.413, 5.44, 5.531, 5.49, 5.546, 5.663, 5.575, 5.2, 5.089, 5.245, 5.219, 5.284, 5.28, 5.24, 4.999, 5.059, 5.18, 4.941, 4.98, 5.041, 4.92, 4.98, 4.83, 4.637, 4.258, 4.598, 4.856, 4.52, 4.363, 4.356, 4.154, 4.2, 4.356, 4.501, 4.585, 4.695, 4.515, 4.541, 4.667, 4.475, 4.516, 4.598, 4.66, 4.533, 4.45, 4.44, 4.349, 4.532, 4.54, 4.368, 4.329, 4.184, 4.229, 4.282, 4.5, 4.296, 4.178, 4.188, 4.218, 3.826, 3.979, 3.957, 4.087, 4.355, 4.283, 4.441, 4.469, 4.609, 4.527, 4.511, 4.527, 4.486, 4.356, 4.524, 4.583, 4.597, 4.497, 4.494, 4.558, 4.531, 4.38, 4.238, 4.527, 4.361, 4.175, 4.097, 4.139, 3.433, 3.253, 2.715, 2.6, 2.759, 3.353, 3.195, 3.139, 3.351, 3.764, 3.832, 3.094, 2.351, 2.571, 2.525, 2.39, 2.51, 2.545, 2.609, 2.783, 2.65, 2.597, 2.91, 3.254, 3.506, 3.754, 4.26, 4.512, 4.67, 5.12, 5.999, 5.985, 5.735, 5.593, 5.686, 5.89, 6.296, 6.651, 6.74, 6.611, 6.76, 6.678, 6.499, 6.909, 6.558, 5.481, 5.322, 5.398, 5.765, 5.38, 5.69, 5.53, 5.27, 5.29, 5.49, 5.81, 6.48, 6.68, 5.69, 5.3, 5.53, 5.46, 5.82, 6.31, 5.94, 5.97, 6.13, 5.96, 5.53, 5.3, 5.76, 5.73, 5.98, 5.9, 6.1, 5.67, 5.58, 5.8, 5.71, 5.63, 5.59, 5.67, 5.63, 5.56, 5.31, 5.4, 5.34, 5.28, 5.66, 5.34, 5.53, 5.54, 5.46], "fair": [3.851, 3.88, 3.817, 3.833, 4.02, 4.208, 4.295, 4.09, 4.326, 4.736, 5.209, 5.245, 5.66, 5.294, 5.256, 5.535, 5.598, 5.557, 5.411, 5.235, 5.036, 4.836, 4.871, 4.847, 4.87, 4.87, 4.971, 5.005, 4.953, 4.976, 4.676, 4.633, 4.656, 4.647, 4.925, 5.032, 5.13, 5.063, 4.962, 5.054, 5.093, 5.166, 5.241, 5.036, 4.728, 4.564, 4.314, 4.296, 4.235, 3.734, 3.639, 3.731, 3.917, 4.007, 4.387, 4.377, 4.431, 4.197, 4.205, 4.077, 4.06, 3.967, 4.134, 4.113, 4.16, 4.223, 4.297, 4.397, 4.449, 4.804, 5.3, 5.251, 5.294, 5.498, 5.361, 4.892, 4.829, 4.833, 4.933, 4.926, 4.914, 4.72, 4.633, 4.642, 4.507, 4.52, 4.187, 3.868, 3.917, 3.354, 3.104, 3.165, 3.35, 3.542, 3.62, 3.608, 3.3, 4.021, 3.496, 3.263, 3.137, 3.066, 2.78, 3.14, 3.275, 3.44, 3.417, 3.517, 3.694, 3.965, 4.092, 4.035, 4.165, 4.147, 4.035, 3.937, 4.012, 4.259, 4.409, 4.449, 4.345, 4.673, 4.924, 5.198, 5.635, 5.29, 5.734, 5.454, 5.158, 5.539, 5.829, 5.781, 5.317, 5.455, 5.304, 5.673, 5.34, 5.349, 5.174, 5.21, 5.202, 5.295, 5.587, 6.114, 6.083, 5.679, 5.256, 5.649, 5.751, 5.683, 5.98, 5.706, 5.671, 5.583, 5.6, 5.358, 5.475, 5.856, 5.758, 6.028, 6.106, 5.979, 5.707, 5.799, 5.87, 5.769, 5.739, 5.683, 5.613, 5.561, 5.593, 5.554, 5.627, 5.759, 5.681, 6.047, 5.949, 6.35, 6.272, 6.216], "z": [2.482, 2.479, 2.724, 2.634, 2.425, 2.312, 2.034, 1.763, 1.212, 0.808, 0.014, 0.06, -0.608, -0.087, -0.41, -0.758, -0.666, -0.981, -0.688, -0.311, -0.186, 0.227, -0.068, -0.336, -0.976, -0.434, -0.184, -0.774, -0.942, -0.988, -0.832, -0.691, -0.48, -0.233, -0.543, -0.537, -0.98, -0.831, -0.47, -0.923, -0.919, -0.905, -0.926, -0.802, -0.444, -0.199, 0.053, 0.373, 0.484, 1.006, 1.096, 0.719, 0.495, 0.436, 0.178, -0.13, -0.405, -0.016, 0.019, -0.401, -0.13, -0.018, -0.077, 0.383, 0.193, 0.344, 0.272, 0.334, 0.123, -0.468, -1.23, -1.219, -1.493, -1.552, -1.24, -0.47, -0.529, -0.541, -0.598, -0.631, -0.851, -0.769, -0.171, -0.449, -0.531, -0.675, -0.079, -0.693, -1.057, -1.019, -0.803, -0.648, 0.004, -0.553, -0.768, -0.41, 0.736, -0.303, -0.642, -1.452, -0.902, -0.862, -0.622, -1.005, -1.164, -1.325, -1.011, -1.38, -1.746, -1.68, -1.334, -0.842, -0.656, 0.178, 0.757, 1.164, 1.76, 2.766, 2.506, 2.043, 1.982, 1.609, 1.534, 1.745, 1.615, 2.304, 1.393, 2.076, 2.417, 1.526, 1.716, 1.234, 0.259, -0.214, 0.148, 0.145, 0.061, 0.541, 0.564, 0.094, 0.138, 0.308, 0.353, 0.581, 0.947, 0.015, 0.069, -0.192, -0.465, 0.216, 0.522, 0.37, 0.474, 0.868, 0.572, 0.271, -0.281, -0.154, -0.047, -0.079, -0.329, 0.19, -0.06, -0.35, -0.114, -0.096, -0.175, -0.149, 0.089, 0.108, -0.054, -0.39, -0.363, -0.669, -0.64, -0.618, -0.971, -1.306, -1.167, -1.204]}, {"ccy": "BRL", "obs": [9.656, 9.201, 9.436, 9.166, 9.445, 9.475, 9.836, 9.622, 9.854, 10.751, 10.876, 10.876, 10.876, 10.876, 10.876, 10.876, 10.876, 10.876, 12.894, 13.161, 12.751, 12.353, 12.013, 12.042, 11.951, 11.402, 11.781, 12.179, 11.926, 12.478, 11.768, 12.628, 13.092, 12.586, 12.538, 12.744, 12.583, 13.586, 14.979, 15.245, 15.684, 15.684, 16.397, 16.585, 15.833, 13.761, 12.992, 12.513, 12.746, 12.086, 11.793, 11.994, 11.45, 11.506, 11.832, 11.447, 10.827, 10.268, 10.268, 10.186, 10.012, 10.635, 10.304, 10.023, 9.79, 9.773, 10.013, 10.298, 10.324, 9.725, 9.822, 9.449, 9.744, 10.249, 12.313, 11.453, 11.571, 12.157, 11.197, 10.11, 10.009, 9.29, 9.083, 8.988, 8.762, 8.965, 8.989, 7.887, 7.191, 7.15, 7.313, 6.982, 6.396, 6.924, 6.876, 6.724, 6.608, 8.892, 8.617, 7.187, 6.862, 6.659, 6.829, 7.168, 7.667, 7.897, 7.956, 7.083, 7.966, 8.195, 9.08, 9.325, 9.467, 9.162, 9.465, 10.012, 10.835, 11.142, 12.348, 11.294, 10.726, 11.428, 11.476, 12.134, 12.193, 12.455, 13.235, 13.289, 12.232, 11.994, 11.81, 11.876, 12.978, 12.763, 13.117, 13.316, 13.048, 12.673, 11.746, 11.131, 10.657, 10.837, 11.368, 11.968, 11.653, 10.883, 10.291, 10.766, 10.79, 10.903, 11.587, 11.642, 12.14, 11.648, 11.788, 11.849, 12.321, 12.792, 13.55, 14.891, 15.239, 14.691, 14.83, 14.664, 13.996, 13.991, 13.869, 13.817, 14.078, 13.839, 13.768, 13.409, 13.823, 13.799, 13.626, 14.174, 13.621, 14.445, 14.355, 14.451], "fair": [7.498, 7.552, 7.382, 7.429, 7.997, 8.589, 9.079, 8.229, 9.048, 10.439, 11.661, 12.037, 12.806, 12.203, 12.12, 13.296, 13.149, 13.392, 12.737, 12.391, 11.72, 11.17, 11.347, 11.389, 11.535, 11.05, 11.572, 11.575, 11.455, 11.625, 11.099, 12.104, 12.424, 11.484, 12.008, 12.55, 12.623, 13.273, 13.547, 13.967, 14.14, 14.879, 16.607, 15.556, 15.129, 12.948, 12.397, 11.726, 11.965, 9.897, 9.564, 9.389, 10.083, 10.185, 11.491, 11.49, 11.125, 10.508, 10.381, 9.858, 9.64, 10.03, 10.353, 10.141, 10.045, 9.833, 10.024, 10.086, 10.232, 10.974, 12.009, 12.034, 12.078, 12.811, 13.948, 12.459, 12.095, 12.989, 12.453, 11.522, 11.564, 10.827, 10.326, 10.373, 10.091, 10.414, 9.768, 8.71, 8.277, 7.152, 6.847, 7.23, 7.121, 7.659, 7.593, 7.538, 6.418, 9.467, 8.409, 9.236, 8.617, 8.358, 6.94, 7.7, 8.325, 8.199, 7.725, 7.875, 8.898, 9.594, 9.909, 9.756, 9.423, 9.332, 9.482, 9.588, 9.888, 10.599, 11.672, 11.503, 10.77, 11.212, 11.746, 12.066, 12.616, 12.341, 13.72, 13.428, 11.967, 12.285, 12.874, 12.576, 11.697, 12.281, 11.959, 12.704, 11.938, 11.983, 11.761, 11.723, 11.819, 11.652, 12.356, 13.244, 12.839, 12.082, 11.237, 12.209, 12.438, 12.434, 13.242, 12.744, 12.727, 12.413, 12.424, 11.887, 11.732, 12.689, 12.822, 14.253, 13.691, 13.4, 12.551, 13.06, 13.169, 13.061, 12.776, 12.58, 12.405, 12.2, 12.318, 12.387, 12.663, 12.701, 12.598, 13.28, 13.051, 13.899, 13.686, 13.471], "z": [1.977, 1.51, 1.881, 1.591, 1.326, 0.811, 0.693, 1.275, 0.737, 0.285, -0.72, -1.064, -1.769, -1.217, -1.141, -2.218, -2.083, -2.306, 0.143, 0.705, 0.944, 1.083, 0.609, 0.598, 0.38, 0.321, 0.19, 0.552, 0.43, 0.78, 0.612, 0.479, 0.611, 1.009, 0.485, 0.177, -0.038, 0.286, 1.311, 1.17, 1.414, 0.736, -0.194, 0.942, 0.644, 0.744, 0.544, 0.72, 0.715, 2.004, 2.041, 2.386, 1.252, 1.209, 0.312, -0.041, -0.274, -0.221, -0.104, 0.299, 0.34, 0.553, -0.046, -0.109, -0.234, -0.056, -0.011, 0.193, 0.084, -1.145, -2.004, -2.369, -2.139, -2.349, -1.498, -0.922, -0.481, -0.763, -1.152, -1.295, -1.426, -1.409, -1.139, -1.27, -1.218, -1.329, -0.715, -0.755, -0.996, -0.003, 0.426, -0.228, -0.665, -0.675, -0.658, -0.746, 0.173, -0.528, 0.19, -1.878, -1.608, -1.557, -0.103, -0.488, -0.604, -0.277, 0.21, -0.727, -0.855, -1.283, -0.76, -0.396, 0.039, -0.157, -0.016, 0.387, 0.866, 0.496, 0.618, -0.191, -0.041, 0.196, -0.248, 0.061, -0.389, 0.104, -0.446, -0.128, 0.243, -0.268, -0.976, -0.642, 1.173, 0.44, 1.06, 0.559, 1.016, 0.632, -0.015, -0.543, -1.065, -0.747, -0.906, -1.17, -1.087, -1.1, -0.867, -1.323, -1.511, -1.404, -1.517, -1.011, -0.539, -0.701, -0.584, -0.036, 0.539, 0.093, 0.667, 0.583, 1.417, 1.182, 2.087, 1.469, 0.757, 0.851, 1.0, 1.133, 1.532, 1.501, 1.328, 0.935, 1.062, 1.005, 0.941, 0.817, 0.522, 0.499, 0.612, 0.897]}, {"ccy": "MXN", "obs": [5.247, 5.495, 5.467, 5.366, 5.111, 4.991, 4.936, 4.53, 4.707, 5.249, 5.799, 5.854, 6.336, 5.947, 6.027, 6.336, 6.421, 6.543, 6.348, 6.269, 6.229, 5.878, 5.731, 5.72, 5.718, 5.793, 5.995, 5.904, 5.768, 5.92, 5.276, 5.541, 5.7, 5.801, 5.918, 6.156, 5.949, 6.015, 6.151, 5.911, 6.024, 6.185, 6.293, 6.218, 6.136, 6.063, 5.815, 6.019, 6.153, 5.892, 5.872, 5.779, 6.109, 6.358, 7.252, 7.583, 7.611, 7.292, 7.158, 7.157, 7.129, 6.995, 6.807, 6.881, 6.849, 6.924, 7.249, 7.259, 7.75, 7.484, 7.642, 7.516, 7.437, 7.747, 7.954, 7.736, 7.689, 8.002, 8.01, 8.792, 9.072, 8.734, 8.459, 8.252, 7.948, 8.028, 8.049, 7.692, 7.651, 7.284, 6.961, 6.742, 6.773, 7.081, 6.86, 6.818, 6.532, 7.403, 6.888, 6.088, 5.97, 5.644, 5.753, 6.001, 6.174, 6.282, 5.782, 5.508, 5.575, 6.167, 6.767, 6.694, 6.853, 6.7, 6.903, 7.055, 7.017, 7.56, 7.594, 7.503, 7.554, 7.625, 7.816, 8.442, 8.905, 8.871, 9.259, 9.053, 8.501, 9.057, 9.588, 9.808, 9.291, 8.976, 8.647, 9.37, 8.983, 8.949, 8.744, 8.835, 8.78, 8.994, 9.491, 9.845, 10.066, 9.255, 9.002, 9.275, 9.245, 9.266, 9.946, 9.639, 10.145, 9.792, 9.55, 9.505, 9.404, 10.072, 10.007, 10.413, 9.987, 9.887, 9.377, 9.54, 9.408, 9.249, 9.391, 9.146, 8.935, 8.823, 8.843, 8.909, 9.184, 8.953, 8.838, 9.445, 8.853, 9.348, 9.018, 9.059], "fair": [4.848, 4.936, 4.927, 4.884, 5.214, 5.315, 5.337, 5.132, 5.357, 5.51, 5.978, 6.036, 6.29, 5.931, 6.027, 6.216, 6.269, 6.194, 6.112, 6.111, 6.086, 5.94, 5.959, 5.928, 5.89, 5.929, 6.024, 6.02, 6.011, 6.064, 5.898, 6.042, 6.073, 6.102, 6.356, 6.465, 6.574, 6.561, 6.407, 6.452, 6.598, 6.665, 6.832, 6.823, 6.636, 6.586, 6.402, 6.47, 6.319, 6.161, 6.183, 6.155, 6.404, 6.479, 7.208, 7.236, 7.299, 7.056, 6.981, 6.758, 6.678, 6.678, 6.863, 6.765, 6.659, 6.861, 6.986, 6.909, 7.023, 7.046, 7.233, 7.162, 7.352, 7.723, 7.726, 7.401, 7.514, 7.448, 7.644, 7.725, 7.818, 7.626, 7.564, 7.672, 7.436, 7.512, 7.318, 7.134, 7.197, 6.783, 6.691, 6.663, 6.824, 6.931, 6.864, 6.713, 6.47, 7.197, 6.896, 6.754, 6.434, 6.312, 6.181, 6.176, 6.418, 6.418, 6.326, 6.184, 6.23, 6.466, 6.764, 6.688, 6.72, 6.681, 6.644, 6.663, 6.575, 6.827, 6.906, 6.83, 6.868, 7.125, 7.388, 7.744, 8.329, 8.456, 9.062, 8.891, 8.517, 9.044, 9.494, 9.694, 9.298, 9.509, 9.042, 9.401, 9.158, 9.254, 9.227, 9.243, 9.197, 9.338, 9.646, 10.124, 10.127, 9.68, 9.184, 9.535, 9.586, 9.543, 9.854, 9.575, 9.594, 9.448, 9.312, 9.161, 9.139, 9.52, 9.672, 9.921, 9.99, 9.822, 9.684, 9.783, 9.727, 9.532, 9.487, 9.367, 9.267, 9.077, 9.074, 9.128, 9.255, 9.29, 9.144, 9.489, 9.309, 9.555, 9.512, 9.627], "z": [0.99, 1.389, 1.34, 1.197, -0.256, -0.803, -0.994, -1.492, -1.613, -0.647, -0.444, -0.451, 0.115, 0.041, 0.002, 0.298, 0.379, 0.866, 0.586, 0.393, 0.355, -0.152, -0.565, -0.516, -0.426, -0.337, -0.071, -0.286, -0.603, -0.356, -1.543, -1.242, -0.925, -0.747, -1.087, -0.765, -1.552, -1.355, -0.634, -1.341, -1.425, -1.19, -1.336, -1.501, -1.241, -1.298, -1.457, -1.119, -0.412, -0.666, -0.771, -0.933, -0.73, -0.3, 0.111, 0.861, 0.775, 0.585, 0.441, 0.991, 1.12, 0.788, -0.139, 0.289, 0.472, 0.158, 0.654, 0.868, 1.804, 1.088, 1.016, 0.88, 0.212, 0.06, 0.567, 0.833, 0.434, 1.377, 0.91, 2.648, 3.112, 2.751, 2.222, 1.44, 1.272, 1.281, 1.815, 1.385, 1.129, 1.244, 0.672, 0.197, -0.125, 0.374, -0.01, 0.261, 0.155, 0.512, -0.018, -1.652, -1.151, -1.658, -1.062, -0.434, -0.605, -0.336, -1.348, -1.676, -1.624, -0.74, 0.007, 0.016, 0.33, 0.047, 0.643, 0.974, 1.099, 1.82, 1.709, 1.672, 1.703, 1.241, 1.064, 1.734, 1.431, 1.032, 0.49, 0.403, -0.038, 0.034, 0.233, 0.282, -0.016, -1.322, -0.98, -0.075, -0.432, -0.756, -1.199, -1.011, -1.034, -0.854, -0.384, -0.691, -0.15, -1.055, -0.451, -0.646, -0.846, -0.688, 0.23, 0.158, 1.367, 0.854, 0.59, 0.855, 0.659, 1.372, 0.831, 1.223, -0.007, 0.162, -0.762, -0.602, -0.791, -0.702, -0.237, -0.548, -0.823, -0.63, -0.573, -0.542, -0.176, -0.836, -0.758, -0.109, -1.13, -0.512, -1.225, -1.409]}, {"ccy": "PEN", "obs": [4.615, 4.504, 4.324, 4.091, 4.09, 4.14, 4.149, 3.958, 4.025, 5.195, 5.185, 5.198, 6.004, 5.456, 5.295, 5.421, 5.548, 5.896, 6.515, 6.195, 5.995, 5.647, 5.309, 5.122, 5.226, 5.143, 5.468, 5.39, 5.251, 5.405, 5.074, 5.382, 5.589, 5.559, 5.882, 6.174, 6.535, 6.794, 7.56, 7.432, 7.093, 7.037, 7.305, 7.441, 7.504, 7.031, 6.522, 6.219, 6.095, 5.729, 5.714, 5.65, 5.767, 5.687, 5.691, 6.355, 6.081, 6.137, 5.89, 5.718, 5.698, 5.643, 5.843, 5.468, 5.451, 5.286, 5.381, 5.284, 5.204, 4.726, 4.865, 4.886, 5.123, 5.484, 5.658, 5.474, 5.37, 5.442, 5.643, 5.89, 5.603, 5.663, 5.615, 5.501, 5.31, 5.266, 5.159, 4.822, 4.55, 4.36, 4.058, 4.137, 4.264, 4.258, 4.17, 4.095, 3.825, 6.116, 4.097, 3.841, 3.871, 3.747, 4.182, 4.195, 4.273, 4.171, 3.915, 3.493, 3.733, 4.2, 4.616, 5.047, 4.941, 5.408, 5.896, 6.356, 6.291, 6.284, 5.9, 5.942, 5.884, 6.076, 6.008, 6.604, 7.48, 7.881, 8.021, 8.283, 7.91, 8.187, 8.707, 8.225, 7.733, 7.954, 8.049, 7.946, 7.647, 7.523, 7.253, 7.146, 6.785, 6.794, 6.895, 7.489, 7.67, 7.215, 6.765, 6.644, 6.72, 7.008, 7.584, 7.075, 7.034, 6.998, 6.674, 6.53, 6.234, 6.796, 6.555, 6.727, 6.746, 6.472, 6.411, 6.619, 6.403, 6.719, 6.412, 6.256, 6.21, 6.039, 6.058, 5.915, 5.825, 5.883, 5.812, 6.818, 6.619, 6.778, 6.024, 6.097], "fair": [3.291, 3.545, 3.735, 3.512, 3.79, 4.255, 4.591, 4.132, 4.469, 4.964, 5.65, 5.851, 6.093, 5.418, 5.707, 6.138, 5.781, 6.128, 5.733, 5.579, 5.167, 5.067, 5.143, 5.063, 5.377, 5.089, 5.49, 5.619, 5.617, 5.773, 6.012, 5.786, 6.163, 6.003, 5.908, 6.38, 6.331, 6.954, 6.635, 6.901, 6.7, 7.086, 7.055, 7.62, 7.549, 6.635, 6.235, 6.288, 6.216, 5.474, 5.562, 5.185, 5.114, 5.237, 6.037, 6.009, 5.941, 5.714, 5.395, 5.357, 5.109, 5.228, 5.373, 5.506, 5.471, 5.463, 5.512, 5.402, 5.587, 5.311, 5.671, 5.748, 5.988, 6.511, 6.635, 5.841, 5.823, 5.585, 5.485, 5.695, 5.904, 5.635, 5.634, 5.728, 5.5, 5.423, 5.207, 4.832, 4.603, 4.25, 4.031, 4.315, 4.495, 4.586, 4.274, 4.282, 3.909, 7.494, 5.967, 5.142, 4.436, 4.078, 3.577, 3.631, 4.136, 3.956, 4.451, 3.974, 3.912, 4.364, 5.059, 5.221, 4.843, 5.239, 4.973, 5.378, 5.11, 5.5, 5.685, 5.611, 5.501, 5.66, 6.398, 6.512, 6.956, 7.048, 7.478, 7.915, 7.228, 7.589, 8.065, 7.944, 7.28, 7.574, 7.712, 7.537, 7.65, 7.564, 7.341, 6.891, 6.644, 6.567, 7.023, 7.556, 7.535, 7.042, 6.654, 7.111, 6.812, 6.715, 7.012, 6.886, 7.05, 6.644, 6.796, 6.663, 6.417, 6.733, 7.011, 7.138, 7.172, 7.02, 6.963, 6.966, 6.836, 6.614, 6.437, 6.277, 6.247, 5.884, 5.885, 6.068, 6.358, 6.283, 6.305, 6.595, 6.382, 6.342, 6.289, 6.436], "z": [2.947, 2.135, 1.312, 1.289, 0.668, -0.257, -0.985, -0.387, -0.988, 0.513, -1.035, -1.453, -0.199, 0.085, -0.918, -1.597, -0.518, -0.516, 1.74, 1.371, 1.843, 1.29, 0.368, 0.132, -0.336, 0.12, -0.049, -0.509, -0.815, -0.819, -2.088, -0.901, -1.278, -0.989, -0.058, -0.458, 0.453, -0.356, 2.059, 1.183, 0.874, -0.109, 0.556, -0.398, -0.101, 0.88, 0.638, -0.154, -0.271, 0.568, 0.338, 1.035, 1.454, 1.001, -0.771, 0.771, 0.311, 0.94, 1.102, 0.802, 1.31, 0.924, 1.045, -0.085, -0.044, -0.394, -0.293, -0.262, -0.853, -1.303, -1.794, -1.92, -1.926, -2.287, -2.176, -0.817, -1.009, -0.318, 0.351, 0.434, -0.67, 0.062, -0.044, -0.505, -0.423, -0.35, -0.107, -0.023, -0.118, 0.245, 0.06, -0.397, -0.514, -0.73, -0.231, -0.418, -0.188, -3.069, -4.163, -2.897, -1.258, -0.737, 1.346, 1.255, 0.304, 0.479, -1.194, -1.072, -0.399, -0.365, -0.987, -0.387, 0.217, 0.376, 2.054, 2.177, 2.628, 1.745, 0.478, 0.737, 0.853, 0.926, -0.869, 0.204, 1.166, 1.853, 1.208, 0.82, 1.517, 1.332, 1.429, 0.626, 1.009, 0.846, 0.749, 0.91, -0.008, -0.092, -0.196, 0.568, 0.314, 0.506, -0.284, -0.15, 0.3, 0.385, 0.247, -1.039, -0.205, 0.652, 1.273, 0.42, -0.037, 0.787, -0.272, -0.296, -0.407, 0.141, -1.016, -0.915, -0.949, -1.221, -1.23, -0.774, -0.964, 0.234, -0.055, -0.047, -0.082, 0.345, 0.384, -0.341, -1.187, -0.89, -1.099, 0.495, 0.528, 0.971, -0.59, -0.756]}, {"ccy": "COP", "obs": [6.111, 6.124, 5.874, 5.475, 5.076, 4.843, 5.099, 4.89, 5.033, 6.702, 6.72, 6.87, 7.315, 6.846, 6.85, 6.832, 6.774, 6.962, 7.278, 6.675, 6.218, 6.355, 6.34, 6.537, 6.7, 6.454, 6.715, 6.583, 6.547, 7.139, 6.523, 6.565, 6.78, 6.734, 6.909, 7.087, 7.25, 7.331, 8.601, 8.092, 8.006, 8.396, 8.709, 9.071, 9.013, 8.268, 8.068, 8.014, 7.897, 7.58, 7.546, 6.986, 7.184, 7.395, 7.295, 7.109, 6.785, 7.011, 6.812, 6.381, 6.339, 6.279, 6.787, 6.788, 6.724, 6.464, 6.743, 6.55, 6.476, 6.372, 6.551, 6.736, 6.394, 6.62, 6.582, 6.55, 6.81, 6.862, 6.967, 7.155, 7.086, 6.772, 7.046, 6.891, 6.502, 6.655, 6.787, 6.211, 6.023, 6.043, 6.017, 5.971, 6.036, 6.622, 6.34, 5.969, 5.847, 8.148, 6.788, 6.18, 6.091, 6.091, 6.091, 6.091, 6.091, 5.774, 5.513, 5.422, 5.54, 5.796, 6.767, 6.601, 6.663, 6.663, 6.663, 6.663, 7.32, 7.715, 8.041, 8.39, 8.137, 8.934, 9.115, 9.761, 9.8, 11.67, 11.539, 12.453, 12.156, 12.422, 12.814, 14.294, 13.066, 13.038, 12.07, 13.143, 12.219, 11.576, 11.101, 10.668, 9.929, 10.34, 11.016, 12.008, 11.645, 10.686, 9.945, 9.704, 9.889, 10.115, 10.956, 10.535, 10.93, 10.825, 10.518, 10.248, 10.177, 10.932, 10.807, 11.759, 11.358, 11.627, 12.011, 12.542, 12.246, 12.776, 12.122, 11.659, 11.576, 11.336, 11.625, 12.522, 11.984, 12.197, 13.104, 13.055, 12.669, 13.987, 11.952, 11.809], "fair": [4.391, 4.688, 4.613, 4.814, 4.766, 5.243, 5.376, 4.896, 5.176, 5.987, 6.426, 6.643, 7.293, 6.965, 6.654, 7.225, 7.145, 7.488, 7.021, 7.06, 6.611, 6.261, 6.335, 6.253, 6.409, 6.184, 6.589, 6.552, 6.508, 6.6, 6.717, 6.47, 6.749, 6.615, 6.978, 7.428, 7.469, 7.764, 8.052, 7.877, 7.735, 7.886, 8.295, 8.917, 8.572, 7.411, 7.08, 7.219, 7.397, 6.202, 6.154, 5.965, 6.374, 6.857, 7.467, 7.23, 7.03, 6.799, 6.8, 6.633, 6.661, 6.224, 6.66, 6.659, 6.492, 6.498, 6.653, 6.611, 6.663, 6.81, 7.788, 7.846, 7.66, 8.047, 7.96, 7.388, 7.404, 7.455, 7.631, 7.916, 8.126, 8.178, 7.62, 7.453, 7.114, 7.036, 6.959, 6.615, 6.295, 5.932, 5.564, 5.774, 5.741, 6.008, 5.899, 5.895, 5.506, 9.262, 7.487, 7.054, 6.607, 6.383, 5.361, 6.006, 6.197, 6.398, 5.927, 5.827, 6.231, 6.622, 6.838, 6.861, 7.115, 6.992, 7.226, 7.266, 7.26, 7.93, 7.997, 8.842, 8.617, 9.469, 9.935, 9.866, 10.571, 11.011, 11.931, 11.883, 10.937, 11.982, 12.624, 13.232, 11.901, 11.776, 11.151, 12.518, 12.019, 11.695, 11.775, 11.033, 11.208, 10.893, 11.54, 12.605, 11.798, 11.125, 10.11, 11.11, 11.285, 10.946, 11.781, 11.122, 11.249, 11.072, 11.507, 11.104, 11.065, 12.049, 11.635, 12.038, 11.995, 11.873, 11.879, 12.998, 12.293, 12.122, 11.744, 11.474, 10.982, 10.716, 10.613, 10.842, 10.786, 10.925, 10.918, 11.67, 10.634, 11.518, 10.604, 10.584], "z": [2.433, 2.031, 1.783, 0.934, 0.437, -0.568, -0.394, -0.009, -0.205, 1.01, 0.415, 0.319, 0.03, -0.17, 0.276, -0.558, -0.527, -0.747, 0.363, -0.546, -0.558, 0.131, 0.006, 0.401, 0.41, 0.381, 0.176, 0.043, 0.054, 0.761, -0.276, 0.133, 0.043, 0.167, -0.1, -0.484, -0.312, -0.615, 0.776, 0.302, 0.382, 0.72, 0.584, 0.216, 0.622, 1.211, 1.396, 1.124, 0.706, 1.949, 1.969, 1.444, 1.146, 0.76, -0.245, -0.172, -0.349, 0.299, 0.015, -0.359, -0.458, 0.076, 0.178, 0.18, 0.327, -0.049, 0.125, -0.088, -0.267, -0.621, -1.752, -1.573, -1.793, -2.022, -1.952, -1.188, -0.843, -0.84, -0.942, -1.078, -1.473, -1.992, -0.814, -0.797, -0.868, -0.541, -0.245, -0.573, -0.386, 0.156, 0.64, 0.277, 0.416, 0.868, 0.622, 0.104, 0.481, -1.579, -0.99, -1.239, -0.732, -0.415, 1.032, 0.119, -0.152, -0.885, -0.587, -0.575, -0.98, -1.171, -0.102, -0.37, -0.642, -0.468, -0.799, -0.855, 0.083, -0.305, 0.061, -0.642, -0.68, -0.759, -1.162, -0.151, -1.093, 0.932, -0.556, 0.805, 1.725, 0.621, 0.267, 1.501, 1.648, 1.785, 1.299, 0.883, 0.281, -0.17, -0.955, -0.518, -1.812, -0.784, -0.743, -0.846, -0.218, -0.623, -0.235, -1.992, -1.978, -1.178, -1.169, -0.832, -0.453, -0.351, -1.401, -1.214, -1.258, -1.583, -1.173, -0.396, -0.904, -0.35, 0.185, -0.648, -0.068, 0.924, 0.534, 0.26, 0.84, 0.876, 1.431, 2.376, 1.694, 1.798, 3.092, 1.959, 2.879, 3.493, 1.906, 1.732]}], "years": [2012, 2012, 2012, 2012, 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2014, 2014, 2014, 2014, 2014, 2014, 2014, 2014, 2014, 2014, 2014, 2014, 2014, 2015, 2015, 2015, 2015, 2015, 2015, 2015, 2015, 2015, 2015, 2015, 2015, 2015, 2016, 2016, 2016, 2016, 2016, 2016, 2016, 2016, 2016, 2016, 2016, 2016, 2016, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2018, 2018, 2018, 2018, 2018, 2018, 2018, 2018, 2018, 2018, 2018, 2018, 2018, 2019, 2019, 2019, 2019, 2019, 2019, 2019, 2019, 2019, 2019, 2019, 2019, 2019, 2020, 2020, 2020, 2020, 2020, 2020, 2020, 2020, 2020, 2020, 2020, 2020, 2020, 2021, 2021, 2021, 2021, 2021, 2021, 2021, 2021, 2021, 2021, 2021, 2021, 2021, 2022, 2022, 2022, 2022, 2022, 2022, 2022, 2022, 2022, 2022, 2022, 2022, 2022, 2023, 2023, 2023, 2023, 2023, 2023, 2023, 2023, 2023, 2023, 2023, 2023, 2023, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2025, 2025, 2025, 2025, 2025, 2025, 2025, 2025, 2025, 2025, 2025, 2025, 2025, 2026, 2026, 2026, 2026, 2026, 2026, 2026]}}, "coverage": [{"src": "yfinance", "state": "live"}, {"src": "ECB · euro", "state": "live"}, {"src": "JGB · Japón", "state": "live"}, {"src": "BCRP · Perú", "state": "live"}, {"src": "FRED · US UST", "state": "live"}, {"src": "BCCh · Chile", "state": "live"}, {"src": "Modelo Fair Value", "state": "live"}]};
+
+const fmtPrice = v => {
+  if (v == null) return null;
+  const a = Math.abs(v);
+  if (a >= 1000) return v.toLocaleString("en-US",{minimumFractionDigits:1,maximumFractionDigits:1});
+  if (a >= 100)  return v.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+  if (a >= 10)   return v.toFixed(2);
+  return v.toFixed(4);
+};
+const fmtPct = v => v == null ? '<span class="nd">n/d</span>' : (v>=0?"+":"") + v.toFixed(2) + "%";
+const cls = v => v == null ? "flat" : v > 0 ? "up" : v < 0 ? "down" : "flat";
+const esc = s => String(s).replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+
+// 12-month sparkline (SVG line + soft area fill + endpoint dot), colored by window trend.
+function sparkline(series) {
+  if (!Array.isArray(series) || series.length < 2) return '<span class="nd">—</span>';
+  const w = 80, h = 24, p = 3;
+  const min = Math.min(...series), max = Math.max(...series), rng = (max - min) || 1;
+  const step = (w - 2*p) / (series.length - 1);
+  const pts = series.map((v, i) => [p + i*step, h - p - ((v - min)/rng)*(h - 2*p)]);
+  const line = pts.map((pt, i) => (i ? "L" : "M") + pt[0].toFixed(1) + " " + pt[1].toFixed(1)).join(" ");
+  const area = `M ${pts[0][0].toFixed(1)} ${h-p} ` + pts.map(pt => "L " + pt[0].toFixed(1) + " " + pt[1].toFixed(1)).join(" ")
+             + ` L ${pts[pts.length-1][0].toFixed(1)} ${h-p} Z`;
+  const [ex, ey] = pts[pts.length-1];
+  const dir = series[series.length-1] >= series[0] ? "up" : "down";
+  return `<svg class="spark ${dir}" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true">`
+    + `<path d="${area}" fill="currentColor" opacity="0.13"/>`
+    + `<path d="${line}" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/>`
+    + `<circle cx="${ex.toFixed(1)}" cy="${ey.toFixed(1)}" r="1.9" fill="currentColor"/></svg>`;
+}
+
+function levelTable(id, rows, col1, unit, spark) {
+  const t = document.getElementById(id);
+  if (!t) return;
+  t.innerHTML = `<thead><tr><th>${col1}</th><th>${unit}</th><th>Δ1D%</th><th>MTD%</th><th>ΔYTD%</th>`
+    + (spark ? `<th class="sparkhead">12 m</th>` : ``) + `</tr></thead>`;
+  const tb = document.createElement("tbody");
+  for (const row of rows) {
+    const [name, last, d1, mtd, ytd, series] = row;
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td>${esc(name)}</td>`
+      + `<td class="num">${last==null?'<span class="nd">n/d</span>':fmtPrice(last)}</td>`
+      + `<td class="${cls(d1)}">${fmtPct(d1)}</td>`
+      + `<td class="${cls(mtd)}">${fmtPct(mtd)}</td>`
+      + `<td class="${cls(ytd)}">${fmtPct(ytd)}</td>`
+      + (spark ? `<td class="sparkcell">${sparkline(series)}</td>` : ``);
+    tb.appendChild(tr);
+  }
+  t.appendChild(tb);
+}
+
+// Header
+document.getElementById("subhead").innerHTML = PAYLOAD.meta.subhead;
+const pills = document.getElementById("pills");
+pills.innerHTML = PAYLOAD.status.map(s => `<span class="pill ${s.state}"><span class="dot"></span>${esc(s.label)}</span>`).join("");
+document.getElementById("nextopen").textContent = PAYLOAD.meta.next_open;
+
+// Snapshot
+const bias = document.getElementById("bias");
+bias.className = "bias " + PAYLOAD.snapshot.bias.dir;
+bias.textContent = "Sesgo del día · " + PAYLOAD.snapshot.bias.text;
+document.getElementById("autotag").textContent = PAYLOAD.snapshot.auto_tag;
+document.getElementById("bullets").innerHTML = PAYLOAD.snapshot.bullets
+  .map(b => `<li><span></span><span><b>${esc(b.lead)}</b> ${esc(b.body)}</span></li>`).join("");
+
+// Economic calendar (today + tomorrow)
+(function(){
+  const c = PAYLOAD.calendar || {};
+  const evHtml = ev => `<div class="cal-ev">`
+    + `<span class="cal-time">${esc(ev.time||"")}</span>`
+    + `<span class="imp imp-${esc(ev.imp||"low")}"></span>`
+    + `<span class="cal-reg">${esc(ev.reg||"")}</span>`
+    + `<span class="cal-name">${esc(ev.name||"")}</span>`
+    + `<span class="cal-meta">${esc(ev.meta||"")}</span></div>`;
+  const card = (label, evs) => {
+    const body = (Array.isArray(evs) && evs.length)
+      ? evs.map(evHtml).join("")
+      : `<div class="cal-empty">Sin eventos de primer nivel.</div>`;
+    return `<div class="cal-card"><h3>${esc(label||"")}</h3><div class="cal-list">${body}</div></div>`;
+  };
+  document.getElementById("calendar").innerHTML = card(c.today_label, c.today) + card(c.tomorrow_label, c.tomorrow);
+})();
+
+// KPIs
+document.getElementById("kpis").innerHTML = PAYLOAD.kpis.map(k =>
+  `<div class="kpi"><div class="k-name">${esc(k.name)}</div><div class="k-val">${esc(k.val)}</div>`
+  + `<div class="k-chg ${k.dir}">${esc(k.chg)}</div></div>`).join("");
+
+// Futuros US (pre-market)
+(function(){
+  const f = PAYLOAD.futures || [];
+  const wrap = document.getElementById("fut-wrap");
+  if (!f.length) { if (wrap) wrap.style.display = "none"; return; }
+  document.getElementById("futures").innerHTML = f.map(r => {
+    const [name, last, d1] = r;
+    return `<div class="kpi"><div class="k-name">${esc(name)}</div>`
+      + `<div class="k-val">${last == null ? '<span class="nd">n/d</span>' : fmtPrice(last)}</div>`
+      + `<div class="k-chg ${cls(d1)}">${fmtPct(d1)}</div></div>`;
+  }).join("");
+})();
+
+// Fed watch chip
+(function(){
+  const fed = PAYLOAD.fed;
+  const chip = document.getElementById("fedchip");
+  if (fed && fed.text) { chip.textContent = "Fed · " + fed.text; chip.style.display = ""; }
+})();
+
+// Earnings de hoy
+(function(){
+  const e = PAYLOAD.earnings || [];
+  const wrap = document.getElementById("earnings-wrap");
+  if (!e.length) { if (wrap) wrap.style.display = "none"; return; }
+  const w = { pre: "Pre-open", post: "Post-cierre", "": "—" };
+  document.getElementById("earnings").innerHTML = e.map(x =>
+    `<div class="earn-item"><span class="earn-when ${x.when||''}">${esc(w[x.when]||x.when||"—")}</span>`
+    + `<b>${esc(x.name)}</b>${x.note ? ` <span class="earn-note">${esc(x.note)}</span>` : ""}</div>`).join("");
+})();
+
+// Level tables
+levelTable("t-g5", PAYLOAD.levels.g5, "Par", "Precio");
+levelTable("t-idx", PAYLOAD.levels.idx, "Índice", "Nivel", true);
+levelTable("t-asia", PAYLOAD.levels.asia, "Par", "Precio");
+levelTable("t-latam", PAYLOAD.levels.latam, "Par", "Precio", true);
+levelTable("t-commod", PAYLOAD.levels.commod, "Commodity", "Precio");
+
+// Rates
+(function(){
+  const t = document.getElementById("t-rates");
+  t.innerHTML = `<thead><tr><th>Instrumento</th><th>2Y</th><th>5Y</th><th>10Y</th>`
+    + `<th class="sparkhead">10 A · 12 m</th></tr></thead>`;
+  const tb = document.createElement("tbody");
+  const cell = c => {
+    if (c === "pending" || c == null) return `<td><span class="pending">por cablear</span></td>`;
+    const [lvl, bp] = c;
+    const bpTxt = bp==null ? "" : ` <span class="${cls(bp)}">(${bp>=0?"+":""}${bp.toFixed(1)}bp)</span>`;
+    return `<td class="num">${lvl.toFixed(2)}%${bpTxt}</td>`;
+  };
+  for (const r of PAYLOAD.rates) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td>${esc(r[0])}</td>` + cell(r[1]) + cell(r[2]) + cell(r[3])
+      + `<td class="sparkcell">${sparkline(r[4])}</td>`;
+    tb.appendChild(tr);
+  }
+  t.appendChild(tb);
+})();
+
+// LatAm EOD
+document.getElementById("eod").innerHTML = PAYLOAD.eod.map(c => {
+  const rows = c.rows.map(r => `<div class="row">${esc(r[0])} <b class="${r[2]||''}">${esc(r[1])}</b></div>`).join("");
+  const note = c.note ? `<div class="note">${esc(c.note)}</div>` : "";
+  return `<div class="c"><h4>${c.flag} ${esc(c.country)} <span class="tk">${esc(c.tk)}</span></h4>${rows}${note}</div>`;
+}).join("");
+
+// Coverage
+document.getElementById("coverage").innerHTML = PAYLOAD.coverage
+  .map(t => `<span class="tag ${t.state}">${esc(t.src)}</span>`).join("");
+
+// Riesgo País · EMBI
+(function(){
+  const embi = PAYLOAD.fairvalue && PAYLOAD.fairvalue.embi;
+  const card = document.getElementById("embi-card");
+  if (!Array.isArray(embi) || !embi.length) { if (card) card.style.display = "none"; return; }
+  const t = document.getElementById("t-embi");
+  t.innerHTML = `<thead><tr><th>País</th><th>EMBI (bp)</th><th>Δ1D (bp)</th><th class="sparkhead">12 m</th></tr></thead>`;
+  const tb = document.createElement("tbody");
+  for (const e of embi) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td>${esc(e.ccy)}</td>`
+      + `<td class="num">${e.bp == null ? '<span class="nd">n/d</span>' : Math.round(e.bp)}</td>`
+      + `<td class="${cls(e.chg_bp)}">${e.chg_bp == null ? "—" : (e.chg_bp >= 0 ? "+" : "") + Math.round(e.chg_bp)}</td>`
+      + `<td class="sparkcell">${sparkline(e.series)}</td>`;
+    tb.appendChild(tr);
+  }
+  t.appendChild(tb);
+})();
+
+// Fair Value · Desvíos
+(function(){
+  const fv = PAYLOAD.fairvalue;
+  const sec = document.getElementById("fv-section");
+  if (!fv || !Array.isArray(fv.fx)) { if (sec) sec.style.display = "none"; return; }
+  const zx = z => Math.abs(z) >= 2 ? "z-ext" : "";
+  function fvTable(id, rows, isRate) {
+    const t = document.getElementById(id);
+    if (!t) return;
+    const devHead = isRate ? "Desvío bp" : "Desvío %";
+    t.innerHTML = `<thead><tr><th>País</th><th>Actual</th><th>Fair</th><th>${devHead}</th><th>Z</th>`
+      + `<th class="sparkhead">Z · 12m</th></tr></thead>`;
+    const tb = document.createElement("tbody");
+    for (const r of rows) {
+      const dev = isRate ? r.dev_bp : r.dev_pct;
+      const devTxt = isRate ? ((dev>=0?"+":"")+dev.toFixed(0)+"bp") : ((dev>=0?"+":"")+dev.toFixed(1)+"%");
+      const actTxt = isRate ? r.actual.toFixed(2)+"%" : fmtPrice(r.actual);
+      const fairTxt = isRate ? r.fair.toFixed(2)+"%" : fmtPrice(r.fair);
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${esc(r.ccy)}</td>`
+        + `<td class="num">${actTxt}</td>`
+        + `<td class="num">${fairTxt}</td>`
+        + `<td class="${cls(dev)}">${devTxt}</td>`
+        + `<td class="${cls(r.z)} ${zx(r.z)}">${(r.z>=0?"+":"")+r.z.toFixed(2)}</td>`
+        + `<td class="sparkcell">${sparkline(r.z_series)}</td>`;
+      tb.appendChild(tr);
+    }
+    t.appendChild(tb);
+  }
+  fvTable("t-fv-fx", fv.fx, false);
+  fvTable("t-fv-rates", fv.rates, true);
+  document.getElementById("fv-note").innerHTML =
+    `<span>Modelo OLS sin constante · fair value fundamental · desvío en z-score del residuo `
+    + `(|z|≥2 en negrita = extremo) · datos al ${esc(fv.asof||"")}</span>`;
+})();
+
+// Fair Value Models · gráficos precio real vs modelo
+(function(){
+  const fv = PAYLOAD.fairvalue;
+  const sec = document.getElementById("fvm-section");
+  if (!fv || !fv.charts || !Array.isArray(fv.charts.fx)) { if (sec) sec.style.display = "none"; return; }
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  function lineChart(obs, fair, z, title, kind, years) {
+    // pr reserva espacio a la derecha para las etiquetas del último dato
+    const W = 300, H = 150, pl = 4, pr = 48, pt = 10, pb = 8;
+    const fmtV = kind === "rate" ? (v => v.toFixed(2) + "%") : (v => fmtPrice(v));
+    const all = obs.concat(fair).filter(v => v != null && isFinite(v));
+    const min = Math.min(...all), max = Math.max(...all), rng = (max - min) || 1;
+    const n = obs.length;
+    const sx = i => pl + i * (W - pl - pr) / (n - 1);
+    const sy = v => H - pb - ((v - min) / rng) * (H - pt - pb);
+    const d = arr => arr.map((v, i) => (i ? "L" : "M") + sx(i).toFixed(1) + " " + sy(v).toFixed(1)).join(" ");
+    const lo = obs[n - 1], lf = fair[n - 1];
+    const xL = sx(n - 1), yO = sy(lo), yF = sy(lf);
+    let yOl = yO, yFl = yF;
+    if (Math.abs(yO - yF) < 10) { if (yO <= yF) { yOl = yO - 1; yFl = yF + 9; } else { yOl = yO + 9; yFl = yF - 1; } }
+    yOl = clamp(yOl, pt, H - 3); yFl = clamp(yFl, pt, H - 3);
+    const lx = xL + 5;  // etiquetas a la derecha del último punto
+    const main = `<svg viewBox="0 0 ${W} ${H}" class="linechart">`
+      + `<path d="${d(fair)}" class="ln-fair"/><path d="${d(obs)}" class="ln-obs"/>`
+      + `<circle cx="${xL.toFixed(1)}" cy="${yF.toFixed(1)}" r="1.9" class="dot-fair"/>`
+      + `<circle cx="${xL.toFixed(1)}" cy="${yO.toFixed(1)}" r="1.9" class="dot-obs"/>`
+      + `<text x="${lx.toFixed(1)}" y="${yFl.toFixed(1)}" class="lbl-fair" text-anchor="start" dominant-baseline="middle">${esc(fmtV(lf))}</text>`
+      + `<text x="${lx.toFixed(1)}" y="${yOl.toFixed(1)}" class="lbl-obs" text-anchor="start" dominant-baseline="middle">${esc(fmtV(lo))}</text>`
+      + `</svg>`;
+    let zpanel = "";
+    if (Array.isArray(z) && z.length > 1) {
+      const zW = 300, zH = 74, zpl = 4, zpr = 48, lineRight = zW - 4;
+      const zTop = 8, zBot = 50, zMid = 29, zHalf = 21;   // banda del z; 50..74 para el eje de años
+      const zmax = Math.max(3, ...z.map(v => Math.abs(v)).filter(v => isFinite(v)));
+      const zn = z.length;
+      const zx = i => zpl + i * (zW - zpl - zpr) / (zn - 1);
+      const zy = v => zMid - (v / zmax) * zHalf;
+      const zl = z.map((v, i) => (i ? "L" : "M") + zx(i).toFixed(1) + " " + zy(v).toFixed(1)).join(" ");
+      const za = `M ${zx(0).toFixed(1)} ${zy(0).toFixed(1)} `
+        + z.map((v, i) => "L " + zx(i).toFixed(1) + " " + zy(v).toFixed(1)).join(" ")
+        + ` L ${zx(zn - 1).toFixed(1)} ${zy(0).toFixed(1)} Z`;
+      const band = t => `<line x1="${zpl}" y1="${zy(t).toFixed(1)}" x2="${lineRight}" y2="${zy(t).toFixed(1)}" class="z-band"/>`;
+      let iMax = 0, iMin = 0;
+      for (let i = 1; i < zn; i++) { if (z[i] > z[iMax]) iMax = i; if (z[i] < z[iMin]) iMin = i; }
+      const plotR = zW - zpr;
+      const anchorFor = x => x > plotR * 0.82 ? "end" : (x < plotR * 0.18 ? "start" : "middle");
+      const marker = (i, below) => {
+        const x = zx(i), y = zy(z[i]);
+        const ly = clamp(below ? y + 11 : y - 5, zTop, zBot);
+        return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="2" class="dot-zext"/>`
+          + `<text x="${x.toFixed(1)}" y="${ly.toFixed(1)}" class="lbl-zext" text-anchor="${anchorFor(x)}">${z[i].toFixed(2)}</text>`;
+      };
+      const xz = zx(zn - 1), yz = zy(z[zn - 1]);
+      const lastZ = `<circle cx="${xz.toFixed(1)}" cy="${yz.toFixed(1)}" r="1.8" class="dot-z"/>`
+        + `<text x="${(xz + 5).toFixed(1)}" y="${clamp(yz, zTop, zBot).toFixed(1)}" class="lbl-z" text-anchor="start" dominant-baseline="middle">${z[zn - 1].toFixed(2)}</text>`;
+      // eje X: años (compartido con el gráfico de arriba, misma escala)
+      let axis = "";
+      if (Array.isArray(years) && years.length === zn) {
+        const bounds = [];
+        for (let i = 0; i < years.length; i++) { if (i === 0 || years[i] !== years[i - 1]) bounds.push(i); }
+        const step = Math.max(1, Math.ceil(bounds.length / 7));
+        const show = new Set(); for (let k = 0; k < bounds.length; k += step) show.add(k); show.add(bounds.length - 1);
+        [...show].sort((a, b) => a - b).forEach(k => {
+          const i = bounds[k], x = zx(i);
+          const anc = x < zpl + 8 ? "start" : (x > plotR - 8 ? "end" : "middle");
+          axis += `<line x1="${x.toFixed(1)}" y1="${zBot}" x2="${x.toFixed(1)}" y2="${(zBot + 4).toFixed(1)}" class="axis-tick"/>`
+            + `<text x="${x.toFixed(1)}" y="${(zBot + 13).toFixed(1)}" class="axis-lbl" text-anchor="${anc}">${years[i]}</text>`;
+        });
+      }
+      zpanel = `<div class="chart-zlabel">z-score residuo (±2 · máx/mín marcados)</div>`
+        + `<svg viewBox="0 0 ${zW} ${zH}" class="zpanel">`
+        + band(2) + band(-2)
+        + `<line x1="${zpl}" y1="${zy(0).toFixed(1)}" x2="${lineRight}" y2="${zy(0).toFixed(1)}" class="z-zero"/>`
+        + `<path d="${za}" class="z-fill"/><path d="${zl}" class="z-line"/>`
+        + marker(iMax, false) + marker(iMin, true) + lastZ + axis
+        + `</svg>`;
+    }
+    return `<div class="chart-card"><div class="chart-title">${esc(title)}</div>${main}${zpanel}</div>`;
+  }
+  const chartYears = fv.charts.years;
+  document.getElementById("fvm-fx").innerHTML = fv.charts.fx
+    .map(c => lineChart(c.obs, c.fair, c.z, c.ccy + "/USD", "fx", chartYears)).join("");
+  document.getElementById("fvm-rates").innerHTML = fv.charts.rates
+    .map(c => lineChart(c.obs, c.fair, c.z, c.ccy + " · 10Y", "rate", chartYears)).join("");
+  const rng = fv.range || {};
+  document.getElementById("fvm-range").textContent = (rng.start && rng.end) ? `${rng.start}–${rng.end}` : "";
+})();
+</script>
